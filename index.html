@@ -204,6 +204,11 @@
   <script>
     const SUPABASE_URL = 'https://mreaougsajlycxxsnseg.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_aSFQ0JS4m5cS45m6mIAKLQ_7kvs8qrG';
+    const recoveryHashParams = new URLSearchParams(window.location.hash.slice(1));
+    const recoveryQueryParams = new URLSearchParams(window.location.search);
+    const isRecoveryRedirect = recoveryHashParams.get('type') === 'recovery'
+      || recoveryQueryParams.get('type') === 'recovery'
+      || recoveryQueryParams.has('code');
     const supabaseConfigured = SUPABASE_URL.startsWith('https://')
       && !SUPABASE_URL.includes('PEGA_AQUÍ')
       && SUPABASE_ANON_KEY.length > 20
@@ -534,9 +539,7 @@
             : 'Guardando contraseña…';
       try {
         if (submitMode === 'resetPassword') {
-          const redirectTo = window.location.protocol === 'http:' || window.location.protocol === 'https:'
-            ? `${window.location.origin}${window.location.pathname}`
-            : 'https://diegoarayaa1.github.io/VLOGP/';
+          const redirectTo = 'https://diegoarayaa1.github.io/VLOGP/';
           const { error } = await supabaseClient.auth.resetPasswordForEmail($('authEmail').value.trim(), { redirectTo });
           if (error) {
             showAuthMessage(`No se pudo enviar el enlace de recuperación: ${error.message}`);
@@ -605,13 +608,12 @@
 
     async function initializeAuth() {
       if (!supabaseClient) return;
-      const recoveryRedirect = new URLSearchParams(window.location.hash.slice(1)).get('type') === 'recovery';
       let recoveryPromptShown = false;
       try {
         supabaseClient.auth.onAuthStateChange((event, session) => {
           currentUser = session?.user || null;
           renderAuthState();
-          if ((event === 'PASSWORD_RECOVERY' || (recoveryRedirect && session)) && !recoveryPromptShown) {
+          if ((event === 'PASSWORD_RECOVERY' || (isRecoveryRedirect && session)) && !recoveryPromptShown) {
             recoveryPromptShown = true;
             openAuthModal('updatePassword');
             showAuthMessage('Escribe y confirma tu nueva contraseña.');
@@ -626,10 +628,13 @@
         }
         currentUser = data.session?.user || null;
         renderAuthState();
-        if (recoveryRedirect && data.session && !recoveryPromptShown) {
+        if (isRecoveryRedirect && data.session && !recoveryPromptShown) {
           recoveryPromptShown = true;
           openAuthModal('updatePassword');
           showAuthMessage('Escribe y confirma tu nueva contraseña.');
+        } else if (isRecoveryRedirect && !data.session) {
+          openAuthModal('signIn');
+          showAuthMessage('El enlace de recuperación expiró o no es válido. Solicita uno nuevo e intenta abrirlo desde el mismo navegador.');
         }
       } catch (error) {
         console.error('Error conectando con la autenticación de Supabase:', error);
