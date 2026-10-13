@@ -542,6 +542,10 @@
           const redirectTo = 'https://diegoarayaa1.github.io/VLOGP/';
           const { error } = await supabaseClient.auth.resetPasswordForEmail($('authEmail').value.trim(), { redirectTo });
           if (error) {
+            if (/email rate limit exceeded/i.test(error.message)) {
+              showAuthMessage('Supabase alcanzó el límite de correos de recuperación. Espera hasta 1 hora desde el último intento antes de volver a solicitar el enlace; este límite también puede depender de otros correos enviados desde el proyecto.');
+              return;
+            }
             showAuthMessage(`No se pudo enviar el enlace de recuperación: ${error.message}`);
             return;
           }
