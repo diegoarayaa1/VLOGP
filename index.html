@@ -55,6 +55,7 @@
           <button id="authOpenButton" type="button" class="inline-flex h-9 items-center justify-center rounded-lg border border-slate-200 px-3 text-xs font-bold text-ink transition hover:bg-slate-50">Iniciar sesión</button>
           <div id="authUserControls" class="hidden items-center gap-2">
             <span id="authUserEmail" class="max-w-[180px] truncate text-xs font-semibold text-slate-600"></span>
+            <button id="myReservationsButton" type="button" class="inline-flex h-9 items-center justify-center rounded-lg border border-teal-200 bg-teal-50 px-3 text-xs font-bold text-teal-800 transition hover:bg-teal-100">Mis Reservas</button>
             <button id="authLogoutButton" type="button" class="inline-flex h-9 items-center justify-center rounded-lg border border-slate-200 px-3 text-xs font-bold text-ink transition hover:bg-slate-50">Cerrar sesión</button>
           </div>
         </div>
@@ -92,7 +93,7 @@
 
       <section id="buyerView" class="fade-up">
         <div class="mb-5 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
-          <div><h2 class="font-display text-lg font-extrabold text-ink">Lotes disponibles</h2><p class="mt-1 text-xs text-slate-500"><span id="resultCount">6</span> lotes en el corredor · precios por caja</p></div>
+          <div><h2 class="font-display text-lg font-extrabold text-ink">Lotes disponibles</h2><p class="mt-1 text-xs text-slate-500"><span id="resultCount">0</span> lotes en el corredor · precios por caja</p></div>
           <div class="flex flex-wrap items-center gap-2 text-xs text-slate-500"><span class="inline-flex items-center gap-1.5"><span class="h-2 w-2 rounded-full bg-emerald-500"></span>Más de 120 días</span><span class="inline-flex items-center gap-1.5"><span class="h-2 w-2 rounded-full bg-amber-400"></span>60 a 120 días</span><span class="inline-flex items-center gap-1.5"><span class="h-2 w-2 rounded-full bg-rose-500"></span>Menos de 60 días</span></div>
         </div>
         <div class="mb-5 grid grid-cols-1 gap-3 rounded-xl border border-slate-200 bg-white p-3 sm:grid-cols-2 lg:grid-cols-[minmax(220px,1.5fr)_minmax(160px,1fr)_minmax(160px,1fr)_auto]">
@@ -101,37 +102,7 @@
           <label><span class="sr-only">Filtrar por laboratorio</span><select id="labFilter" class="h-10 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 text-sm text-slate-700"><option value="">Todos los laboratorios</option><option>Lab Chile</option><option>Mintlab</option><option>Saval</option><option>Bagó</option></select></label>
           <button id="clearFilters" type="button" class="inline-flex h-10 items-center justify-center gap-2 rounded-lg px-3 text-sm font-semibold text-slate-500 transition hover:bg-slate-100 hover:text-ink"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="list-filter" aria-hidden="true" class="lucide lucide-list-filter h-4 w-4"><path d="M2 5h20"></path><path d="M6 12h12"></path><path d="M9 19h6"></path></svg>Limpiar filtros</button>
         </div>
-        <div id="productGrid" class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3"><article class="fade-up overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_2px_8px_rgba(16,42,67,.03)] transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md" style="animation-delay:0ms">
-          <div class="flex items-start justify-between gap-3 border-b border-slate-100 px-4 py-4"><div class="flex min-w-0 items-center gap-3"><span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-700"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="pill" aria-hidden="true" class="lucide lucide-pill h-5 w-5"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"></path><path d="m8.5 8.5 7 7"></path></svg></span><div class="min-w-0"><h3 class="truncate font-display text-[15px] font-extrabold text-ink">Paracetamol 500 mg</h3><p class="mt-0.5 truncate text-xs text-slate-500">comprimidos x 20 · Lab Chile</p></div></div><span class="shrink-0 rounded-md bg-teal-50 px-2 py-1 text-[10px] font-bold text-teal-800">-45%</span></div>
-          <div class="space-y-3 px-4 py-4"><div class="flex flex-wrap items-center justify-between gap-2"><span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold ring-1 ring-inset bg-emerald-50 text-emerald-800 ring-emerald-200"><span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>340 días para vencer</span><span class="inline-flex items-center gap-1 text-xs font-medium text-slate-500"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="map-pin" aria-hidden="true" class="lucide lucide-map-pin h-3.5 w-3.5"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>Viña del Mar</span></div>
-          <div class="grid grid-cols-2 gap-2 rounded-lg bg-slate-50 px-3 py-2.5 text-xs"><div><span class="block text-[10px] font-semibold uppercase text-slate-400">Disponibles</span><span class="mt-0.5 block font-bold text-slate-700">32 cajas</span></div><div class="text-right"><span class="block text-[10px] font-semibold uppercase text-slate-400">N.º de lote</span><span class="mt-0.5 block font-mono font-semibold text-slate-700">LCH-26P041</span></div></div>
-          <div class="flex items-end justify-between gap-3 pt-1"><div><span class="block text-[11px] text-slate-400">Precio por caja <span class="ml-1 line-through">$3.990</span></span><strong class="mt-0.5 block font-display text-xl font-extrabold text-ink">$2.190 <span class="font-sans text-[11px] font-semibold text-slate-400">CLP</span></strong></div><button type="button" data-reserve="p1" class="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-teal-700 px-3.5 text-xs font-bold text-white transition hover:bg-teal-800"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="shopping-bag" aria-hidden="true" class="lucide lucide-shopping-bag h-4 w-4"><path d="M16 10a4 4 0 0 1-8 0"></path><path d="M3.103 6.034h17.794"></path><path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"></path></svg>Reservar lote</button></div></div>
-          <div class="flex items-center gap-1.5 border-t border-slate-100 px-4 py-2.5 text-[10px] text-slate-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="file-check-2" aria-hidden="true" class="lucide lucide-file-check-2 h-3.5 w-3.5"><path d="M10.5 22H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v6"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="m14 20 2 2 4-4"></path></svg>Registro ISP F-18234/22 · Director Técnico</div></article><article class="fade-up overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_2px_8px_rgba(16,42,67,.03)] transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md" style="animation-delay:45ms">
-          <div class="flex items-start justify-between gap-3 border-b border-slate-100 px-4 py-4"><div class="flex min-w-0 items-center gap-3"><span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-teal-50 text-teal-700"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="heart-pulse" aria-hidden="true" class="lucide lucide-heart-pulse h-5 w-5"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"></path><path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"></path></svg></span><div class="min-w-0"><h3 class="truncate font-display text-[15px] font-extrabold text-ink">Losartán 50 mg</h3><p class="mt-0.5 truncate text-xs text-slate-500">comprimidos x 30 · Mintlab</p></div></div><span class="shrink-0 rounded-md bg-teal-50 px-2 py-1 text-[10px] font-bold text-teal-800">-44%</span></div>
-          <div class="space-y-3 px-4 py-4"><div class="flex flex-wrap items-center justify-between gap-2"><span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold ring-1 ring-inset bg-emerald-50 text-emerald-800 ring-emerald-200"><span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>231 días para vencer</span><span class="inline-flex items-center gap-1 text-xs font-medium text-slate-500"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="map-pin" aria-hidden="true" class="lucide lucide-map-pin h-3.5 w-3.5"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>Quilpué</span></div>
-          <div class="grid grid-cols-2 gap-2 rounded-lg bg-slate-50 px-3 py-2.5 text-xs"><div><span class="block text-[10px] font-semibold uppercase text-slate-400">Disponibles</span><span class="mt-0.5 block font-bold text-slate-700">14 cajas</span></div><div class="text-right"><span class="block text-[10px] font-semibold uppercase text-slate-400">N.º de lote</span><span class="mt-0.5 block font-mono font-semibold text-slate-700">MT-26L208</span></div></div>
-          <div class="flex items-end justify-between gap-3 pt-1"><div><span class="block text-[11px] text-slate-400">Precio por caja <span class="ml-1 line-through">$6.890</span></span><strong class="mt-0.5 block font-display text-xl font-extrabold text-ink">$3.890 <span class="font-sans text-[11px] font-semibold text-slate-400">CLP</span></strong></div><button type="button" data-reserve="p2" class="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-teal-700 px-3.5 text-xs font-bold text-white transition hover:bg-teal-800"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="shopping-bag" aria-hidden="true" class="lucide lucide-shopping-bag h-4 w-4"><path d="M16 10a4 4 0 0 1-8 0"></path><path d="M3.103 6.034h17.794"></path><path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"></path></svg>Reservar lote</button></div></div>
-          <div class="flex items-center gap-1.5 border-t border-slate-100 px-4 py-2.5 text-[10px] text-slate-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="file-check-2" aria-hidden="true" class="lucide lucide-file-check-2 h-3.5 w-3.5"><path d="M10.5 22H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v6"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="m14 20 2 2 4-4"></path></svg>Registro ISP F-14520/19 · Director Técnico</div></article><article class="fade-up overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_2px_8px_rgba(16,42,67,.03)] transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md" style="animation-delay:90ms">
-          <div class="flex items-start justify-between gap-3 border-b border-slate-100 px-4 py-4"><div class="flex min-w-0 items-center gap-3"><span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-50 text-amber-700"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="pill" aria-hidden="true" class="lucide lucide-pill h-5 w-5"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"></path><path d="m8.5 8.5 7 7"></path></svg></span><div class="min-w-0"><h3 class="truncate font-display text-[15px] font-extrabold text-ink">Amoxicilina 500 mg</h3><p class="mt-0.5 truncate text-xs text-slate-500">cápsulas x 21 · Saval</p></div></div><span class="shrink-0 rounded-md bg-teal-50 px-2 py-1 text-[10px] font-bold text-teal-800">-42%</span></div>
-          <div class="space-y-3 px-4 py-4"><div class="flex flex-wrap items-center justify-between gap-2"><span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold ring-1 ring-inset bg-emerald-50 text-emerald-800 ring-emerald-200"><span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>305 días para vencer</span><span class="inline-flex items-center gap-1 text-xs font-medium text-slate-500"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="map-pin" aria-hidden="true" class="lucide lucide-map-pin h-3.5 w-3.5"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>Villa Alemana</span></div>
-          <div class="grid grid-cols-2 gap-2 rounded-lg bg-slate-50 px-3 py-2.5 text-xs"><div><span class="block text-[10px] font-semibold uppercase text-slate-400">Disponibles</span><span class="mt-0.5 block font-bold text-slate-700">14 cajas</span></div><div class="text-right"><span class="block text-[10px] font-semibold uppercase text-slate-400">N.º de lote</span><span class="mt-0.5 block font-mono font-semibold text-slate-700">SV-26A117</span></div></div>
-          <div class="flex items-end justify-between gap-3 pt-1"><div><span class="block text-[11px] text-slate-400">Precio por caja <span class="ml-1 line-through">$8.990</span></span><strong class="mt-0.5 block font-display text-xl font-extrabold text-ink">$5.190 <span class="font-sans text-[11px] font-semibold text-slate-400">CLP</span></strong></div><button type="button" data-reserve="p3" class="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-teal-700 px-3.5 text-xs font-bold text-white transition hover:bg-teal-800"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="shopping-bag" aria-hidden="true" class="lucide lucide-shopping-bag h-4 w-4"><path d="M16 10a4 4 0 0 1-8 0"></path><path d="M3.103 6.034h17.794"></path><path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"></path></svg>Reservar lote</button></div></div>
-          <div class="flex items-center gap-1.5 border-t border-slate-100 px-4 py-2.5 text-[10px] text-slate-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="file-check-2" aria-hidden="true" class="lucide lucide-file-check-2 h-3.5 w-3.5"><path d="M10.5 22H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v6"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="m14 20 2 2 4-4"></path></svg>Registro ISP F-16774/21 · Director Técnico</div></article><article class="fade-up overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_2px_8px_rgba(16,42,67,.03)] transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md" style="animation-delay:135ms">
-          <div class="flex items-start justify-between gap-3 border-b border-slate-100 px-4 py-4"><div class="flex min-w-0 items-center gap-3"><span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cyan-50 text-cyan-700"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="pill" aria-hidden="true" class="lucide lucide-pill h-5 w-5"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"></path><path d="m8.5 8.5 7 7"></path></svg></span><div class="min-w-0"><h3 class="truncate font-display text-[15px] font-extrabold text-ink">Omeprazol 20 mg</h3><p class="mt-0.5 truncate text-xs text-slate-500">cápsulas x 30 · Bagó</p></div></div><span class="shrink-0 rounded-md bg-teal-50 px-2 py-1 text-[10px] font-bold text-teal-800">-43%</span></div>
-          <div class="space-y-3 px-4 py-4"><div class="flex flex-wrap items-center justify-between gap-2"><span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold ring-1 ring-inset bg-emerald-50 text-emerald-800 ring-emerald-200"><span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>159 días para vencer</span><span class="inline-flex items-center gap-1 text-xs font-medium text-slate-500"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="map-pin" aria-hidden="true" class="lucide lucide-map-pin h-3.5 w-3.5"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>Viña del Mar</span></div>
-          <div class="grid grid-cols-2 gap-2 rounded-lg bg-slate-50 px-3 py-2.5 text-xs"><div><span class="block text-[10px] font-semibold uppercase text-slate-400">Disponibles</span><span class="mt-0.5 block font-bold text-slate-700">26 cajas</span></div><div class="text-right"><span class="block text-[10px] font-semibold uppercase text-slate-400">N.º de lote</span><span class="mt-0.5 block font-mono font-semibold text-slate-700">BG-26O072</span></div></div>
-          <div class="flex items-end justify-between gap-3 pt-1"><div><span class="block text-[11px] text-slate-400">Precio por caja <span class="ml-1 line-through">$7.490</span></span><strong class="mt-0.5 block font-display text-xl font-extrabold text-ink">$4.290 <span class="font-sans text-[11px] font-semibold text-slate-400">CLP</span></strong></div><button type="button" data-reserve="p4" class="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-teal-700 px-3.5 text-xs font-bold text-white transition hover:bg-teal-800"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="shopping-bag" aria-hidden="true" class="lucide lucide-shopping-bag h-4 w-4"><path d="M16 10a4 4 0 0 1-8 0"></path><path d="M3.103 6.034h17.794"></path><path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"></path></svg>Reservar lote</button></div></div>
-          <div class="flex items-center gap-1.5 border-t border-slate-100 px-4 py-2.5 text-[10px] text-slate-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="file-check-2" aria-hidden="true" class="lucide lucide-file-check-2 h-3.5 w-3.5"><path d="M10.5 22H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v6"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="m14 20 2 2 4-4"></path></svg>Registro ISP F-12813/20 · Director Técnico</div></article><article class="fade-up overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_2px_8px_rgba(16,42,67,.03)] transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md" style="animation-delay:180ms">
-          <div class="flex items-start justify-between gap-3 border-b border-slate-100 px-4 py-4"><div class="flex min-w-0 items-center gap-3"><span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-rose-50 text-rose-700"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="sparkles" aria-hidden="true" class="lucide lucide-sparkles h-5 w-5"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path><path d="M20 2v4"></path><path d="M22 4h-4"></path><circle cx="4" cy="20" r="2"></circle></svg></span><div class="min-w-0"><h3 class="truncate font-display text-[15px] font-extrabold text-ink">Cetirizina 10 mg</h3><p class="mt-0.5 truncate text-xs text-slate-500">comprimidos x 30 · Lab Chile</p></div></div><span class="shrink-0 rounded-md bg-teal-50 px-2 py-1 text-[10px] font-bold text-teal-800">-44%</span></div>
-          <div class="space-y-3 px-4 py-4"><div class="flex flex-wrap items-center justify-between gap-2"><span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold ring-1 ring-inset bg-amber-50 text-amber-800 ring-amber-200"><span class="h-1.5 w-1.5 rounded-full bg-amber-400"></span>80 días para vencer</span><span class="inline-flex items-center gap-1 text-xs font-medium text-slate-500"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="map-pin" aria-hidden="true" class="lucide lucide-map-pin h-3.5 w-3.5"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>Quilpué</span></div>
-          <div class="grid grid-cols-2 gap-2 rounded-lg bg-slate-50 px-3 py-2.5 text-xs"><div><span class="block text-[10px] font-semibold uppercase text-slate-400">Disponibles</span><span class="mt-0.5 block font-bold text-slate-700">11 cajas</span></div><div class="text-right"><span class="block text-[10px] font-semibold uppercase text-slate-400">N.º de lote</span><span class="mt-0.5 block font-mono font-semibold text-slate-700">LCH-26C193</span></div></div>
-          <div class="flex items-end justify-between gap-3 pt-1"><div><span class="block text-[11px] text-slate-400">Precio por caja <span class="ml-1 line-through">$4.590</span></span><strong class="mt-0.5 block font-display text-xl font-extrabold text-ink">$2.590 <span class="font-sans text-[11px] font-semibold text-slate-400">CLP</span></strong></div><button type="button" data-reserve="p5" class="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-teal-700 px-3.5 text-xs font-bold text-white transition hover:bg-teal-800"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="shopping-bag" aria-hidden="true" class="lucide lucide-shopping-bag h-4 w-4"><path d="M16 10a4 4 0 0 1-8 0"></path><path d="M3.103 6.034h17.794"></path><path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"></path></svg>Reservar lote</button></div></div>
-          <div class="flex items-center gap-1.5 border-t border-slate-100 px-4 py-2.5 text-[10px] text-slate-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="file-check-2" aria-hidden="true" class="lucide lucide-file-check-2 h-3.5 w-3.5"><path d="M10.5 22H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v6"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="m14 20 2 2 4-4"></path></svg>Registro ISP F-19402/23 · Director Técnico</div></article><article class="fade-up overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_2px_8px_rgba(16,42,67,.03)] transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md" style="animation-delay:180ms">
-          <div class="flex items-start justify-between gap-3 border-b border-slate-100 px-4 py-4"><div class="flex min-w-0 items-center gap-3"><span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-green-50 text-green-700"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="bandage" aria-hidden="true" class="lucide lucide-bandage h-5 w-5"><path d="M10 10.01h.01"></path><path d="M10 14.01h.01"></path><path d="M14 10.01h.01"></path><path d="M14 14.01h.01"></path><path d="M18 6v12"></path><path d="M6 6v12"></path><rect x="2" y="6" width="20" height="12" rx="2"></rect></svg></span><div class="min-w-0"><h3 class="truncate font-display text-[15px] font-extrabold text-ink">Ibuprofeno 400 mg</h3><p class="mt-0.5 truncate text-xs text-slate-500">comprimidos x 20 · Mintlab</p></div></div><span class="shrink-0 rounded-md bg-teal-50 px-2 py-1 text-[10px] font-bold text-teal-800">-43%</span></div>
-          <div class="space-y-3 px-4 py-4"><div class="flex flex-wrap items-center justify-between gap-2"><span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold ring-1 ring-inset bg-emerald-50 text-emerald-800 ring-emerald-200"><span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>135 días para vencer</span><span class="inline-flex items-center gap-1 text-xs font-medium text-slate-500"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="map-pin" aria-hidden="true" class="lucide lucide-map-pin h-3.5 w-3.5"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>Villa Alemana</span></div>
-          <div class="grid grid-cols-2 gap-2 rounded-lg bg-slate-50 px-3 py-2.5 text-xs"><div><span class="block text-[10px] font-semibold uppercase text-slate-400">Disponibles</span><span class="mt-0.5 block font-bold text-slate-700">20 cajas</span></div><div class="text-right"><span class="block text-[10px] font-semibold uppercase text-slate-400">N.º de lote</span><span class="mt-0.5 block font-mono font-semibold text-slate-700">MT-26I083</span></div></div>
-          <div class="flex items-end justify-between gap-3 pt-1"><div><span class="block text-[11px] text-slate-400">Precio por caja <span class="ml-1 line-through">$5.290</span></span><strong class="mt-0.5 block font-display text-xl font-extrabold text-ink">$2.990 <span class="font-sans text-[11px] font-semibold text-slate-400">CLP</span></strong></div><button type="button" data-reserve="p6" class="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-teal-700 px-3.5 text-xs font-bold text-white transition hover:bg-teal-800"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="shopping-bag" aria-hidden="true" class="lucide lucide-shopping-bag h-4 w-4"><path d="M16 10a4 4 0 0 1-8 0"></path><path d="M3.103 6.034h17.794"></path><path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"></path></svg>Reservar lote</button></div></div>
-          <div class="flex items-center gap-1.5 border-t border-slate-100 px-4 py-2.5 text-[10px] text-slate-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="file-check-2" aria-hidden="true" class="lucide lucide-file-check-2 h-3.5 w-3.5"><path d="M10.5 22H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v6"></path><path d="M14 2v5a1 1 0 0 0 1 1h5"></path><path d="m14 20 2 2 4-4"></path></svg>Registro ISP F-13668/18 · Director Técnico</div></article></div>
+        <div id="productGrid" class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3"></div>
         <div id="emptyState" class="hidden rounded-xl border border-dashed border-slate-300 bg-white px-6 py-14 text-center"><span class="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-full bg-slate-100 text-slate-500"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="package-search" aria-hidden="true" class="lucide lucide-package-search h-5 w-5"><path d="M12 22V12"></path><path d="M20.27 18.27 22 20"></path><path d="M21 10.498V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.729l7 4a2 2 0 0 0 .98-.559"></path><path d="M3.29 7 12 12l8.71-5"></path><path d="m7.5 4.27 8.997 5.148"></path><circle cx="18.5" cy="16.5" r="2.5"></circle></svg></span><p id="emptyMessage" class="font-semibold text-ink">Cargando lotes…</p></div>
         <div class="mt-6 flex items-start gap-3 rounded-xl border border-blue-100 bg-blue-50/70 p-4 text-xs leading-5 text-blue-900"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="info" aria-hidden="true" class="lucide lucide-info mt-0.5 h-4 w-4 shrink-0 text-medical"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg><p>Los lotes publicados son gestionados por Directores Técnicos. La transferencia requiere validar la documentación sanitaria y las condiciones de conservación correspondientes.</p></div>
       </section>
@@ -143,6 +114,7 @@
             <form id="sellerForm" novalidate="">
               <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <label class="sm:col-span-2"><span class="mb-1.5 block text-xs font-bold text-slate-700">Principio activo <span class="text-rose-600">*</span></span><input id="activeInput" required="" autocomplete="off" type="text" placeholder="Ej. Paracetamol 500 mg" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
+                <label class="sm:col-span-2"><span class="mb-1.5 block text-xs font-bold text-slate-700">Nombre de la Farmacia <span class="text-rose-600">*</span></span><input id="pharmacyInput" required="" autocomplete="organization" type="text" placeholder="Ej. Farmacia Central" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
                 <label><span class="mb-1.5 block text-xs font-bold text-slate-700">Marca / presentación</span><input id="brandInput" type="text" placeholder="Ej. comprimidos x 20" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
                 <label><span class="mb-1.5 block text-xs font-bold text-slate-700">Laboratorio <span class="text-rose-600">*</span></span><select id="sellerLab" required="" class="h-11 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm"><option value="">Seleccionar laboratorio</option><option>Lab Chile</option><option>Mintlab</option><option>Saval</option><option>Bagó</option></select></label>
                 <label><span class="mb-1.5 block text-xs font-bold text-slate-700">Comuna <span class="text-rose-600">*</span></span><select id="sellerCommune" required="" class="h-11 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm"><option value="">Seleccionar comuna</option><option>Viña del Mar</option><option>Quilpué</option><option>Villa Alemana</option></select></label>
@@ -191,6 +163,16 @@
     </div>
   </div>
 
+  <div id="myReservationsModal" class="modal-backdrop fixed inset-0 z-[60] items-center justify-center overflow-y-auto bg-slate-950/50 p-4 hidden" role="dialog" aria-modal="true" aria-labelledby="myReservationsTitle">
+    <div class="my-auto w-full max-w-2xl overflow-hidden rounded-2xl bg-white shadow-2xl">
+      <div class="flex items-start justify-between border-b border-slate-100 px-5 py-4">
+        <div><p class="text-[11px] font-bold uppercase text-teal-700">Cuenta V-LOG PHARMA</p><h2 id="myReservationsTitle" class="mt-1 font-display text-lg font-extrabold text-ink">Mis Reservas</h2></div>
+        <button id="myReservationsClose" type="button" aria-label="Cerrar Mis Reservas" class="rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-ink"><i data-lucide="x" class="h-5 w-5"></i></button>
+      </div>
+      <div id="myReservationsContent" class="max-h-[70vh] space-y-3 overflow-y-auto p-5" aria-live="polite"></div>
+    </div>
+  </div>
+
   <div id="reservationModal" class="modal-backdrop fixed inset-0 z-50 items-center justify-center overflow-y-auto bg-slate-950/50 p-4 hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="my-auto w-full max-w-lg overflow-hidden rounded-2xl bg-white shadow-2xl">
       <div class="flex items-start justify-between border-b border-slate-100 px-5 py-4"><div><div id="modalEyebrow" class="text-[11px] font-bold uppercase text-teal-700">Guía digital de transferencia</div><h2 id="modalTitle" class="mt-1 font-display text-lg font-extrabold text-ink">Reserva confirmada</h2></div><button id="closeModal" type="button" aria-label="Cerrar" class="rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-ink"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" aria-hidden="true" class="lucide lucide-x h-5 w-5"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></div>
@@ -221,7 +203,6 @@
       : null;
     let products = [];
     const impact = { capital: 8420000, boxes: 186, reas: 472000, kg: 46.5 };
-    const logisticsFee = 3990;
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     let authMode = 'signIn';
@@ -229,7 +210,6 @@
     let catalogMessage = '';
     let catalogLoadFailed = false;
     let activeProductId = null;
-    let selectedQuantity = 1;
     let toastTimer;
     const $ = (id) => document.getElementById(id);
     const formatCLP = (value) => '$' + Math.round(value).toLocaleString('es-CL');
@@ -238,10 +218,12 @@
       return Math.ceil((target - today) / 86400000);
     };
     const expiryStatus = (days) => days > 120
-      ? { text: `${days} días para vencer`, color: 'bg-emerald-50 text-emerald-800 ring-emerald-200', dot: 'bg-emerald-500' }
+      ? { text: `Vence en ${days} días`, color: 'bg-emerald-50 text-emerald-800 ring-emerald-200', dot: 'bg-emerald-500' }
       : days >= 60
-        ? { text: `${days} días para vencer`, color: 'bg-amber-50 text-amber-800 ring-amber-200', dot: 'bg-amber-400' }
-        : { text: `${Math.max(0, days)} días · revisar`, color: 'bg-rose-50 text-rose-800 ring-rose-200', dot: 'bg-rose-500' };
+        ? { text: `Vence en ${days} días`, color: 'bg-amber-50 text-amber-800 ring-amber-200', dot: 'bg-amber-400' }
+        : days >= 0
+          ? { text: days === 0 ? 'Vence hoy' : `Vence en ${days} días`, color: 'bg-rose-50 text-rose-800 ring-rose-200', dot: 'bg-rose-500' }
+          : { text: `Vencido hace ${Math.abs(days)} días`, color: 'bg-rose-50 text-rose-800 ring-rose-200', dot: 'bg-rose-500' };
     const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
 
     function renderProducts() {
@@ -261,13 +243,14 @@
           <div class="flex items-start justify-between gap-3 border-b border-slate-100 px-4 py-4"><div class="flex min-w-0 items-center gap-3"><span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-${product.tone}-50 text-${product.tone}-700"><i data-lucide="${product.icon}" class="h-5 w-5"></i></span><div class="min-w-0"><h3 class="truncate font-display text-[15px] font-extrabold text-ink">${escapeHtml(product.active)}</h3><p class="mt-0.5 truncate text-xs text-slate-500">${product.brand ? `${escapeHtml(product.brand)} · ` : ''}${escapeHtml(product.lab)}</p></div></div>${discount === null ? '' : `<span class="shrink-0 rounded-md bg-teal-50 px-2 py-1 text-[10px] font-bold text-teal-800">-${discount}%</span>`}</div>
           <div class="space-y-3 px-4 py-4"><div class="flex flex-wrap items-center justify-between gap-2"><span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold ring-1 ring-inset ${expiry.color}"><span class="h-1.5 w-1.5 rounded-full ${expiry.dot}"></span>${expiry.text}</span><span class="inline-flex items-center gap-1 text-xs font-medium text-slate-500"><i data-lucide="map-pin" class="h-3.5 w-3.5"></i>${escapeHtml(product.commune)}</span></div>
           <div class="grid grid-cols-2 gap-2 rounded-lg bg-slate-50 px-3 py-2.5 text-xs"><div><span class="block text-[10px] font-semibold uppercase text-slate-400">Disponibles</span><span class="mt-0.5 block font-bold text-slate-700">${product.boxes} cajas</span></div><div class="text-right"><span class="block text-[10px] font-semibold uppercase text-slate-400">N.º de lote</span><span class="mt-0.5 block font-mono font-semibold text-slate-700">${escapeHtml(product.batch)}</span></div></div>
-          <div class="flex items-end justify-between gap-3 pt-1"><div><span class="block text-[11px] text-slate-400">Precio por caja${product.original > product.offer ? ` <span class="ml-1 line-through">${formatCLP(product.original)}</span>` : ''}</span><strong class="mt-0.5 block font-display text-xl font-extrabold text-ink">${formatCLP(product.offer)} <span class="font-sans text-[11px] font-semibold text-slate-400">CLP</span></strong></div><button type="button" data-reserve="${escapeHtml(product.id)}" class="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-teal-700 px-3.5 text-xs font-bold text-white transition hover:bg-teal-800"><i data-lucide="shopping-bag" class="h-4 w-4"></i>Reservar lote</button></div></div>
+          <div class="rounded-lg border border-teal-100 bg-teal-50/70 px-3 py-2 text-xs text-teal-900"><span class="font-bold">Publicado por:</span> ${escapeHtml(product.pharmacy || 'Farmacia no especificada')}</div>
+          <div class="flex items-end justify-between gap-3 pt-1"><div><span class="block text-[11px] text-slate-400">Precio por caja${product.original > product.offer ? ` <span class="ml-1 line-through">${formatCLP(product.original)}</span>` : ''}</span><strong class="mt-0.5 block font-display text-xl font-extrabold text-ink">${formatCLP(product.offer)} <span class="font-sans text-[11px] font-semibold text-slate-400">CLP</span></strong></div><button type="button" data-reserve="${escapeHtml(product.id)}" class="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-teal-700 px-3.5 text-xs font-bold text-white transition hover:bg-teal-800"><i data-lucide="shopping-bag" class="h-4 w-4"></i>Solicitar / Reservar</button></div></div>
           <div class="flex items-center gap-1.5 border-t border-slate-100 px-4 py-2.5 text-[10px] text-slate-400"><i data-lucide="file-check-2" class="h-3.5 w-3.5"></i>Registro ISP ${escapeHtml(product.isp)} · Director Técnico</div></article>`;
       }).join('');
       $('emptyMessage').textContent = catalogLoadFailed
         ? catalogMessage
-        : filtered.length === 0 && products.length === 0 && catalogMessage
-          ? catalogMessage
+        : products.length === 0
+          ? 'No hay lotes disponibles en este momento'
           : 'No encontramos lotes con esos filtros. Prueba otra búsqueda o amplía la selección de comunas.';
       $('emptyState').classList.toggle('hidden', filtered.length > 0);
       $('productGrid').classList.toggle('hidden', filtered.length === 0);
@@ -302,7 +285,8 @@
       try {
         const { data, error } = await supabaseClient
           .from('lotes_medicamentos')
-          .select('id, principio_activo, laboratorio, registro_isp, numero_lote, fecha_vencimiento, cantidad_cajas, precio_oferta, comuna')
+          .select('id, principio_activo, laboratorio, registro_isp, numero_lote, fecha_vencimiento, cantidad_cajas, precio_oferta, comuna, farmacia_origen')
+          .eq('estado', 'disponible')
           .gt('cantidad_cajas', 0)
           .order('fecha_vencimiento', { ascending: true });
 
@@ -322,6 +306,7 @@
           id: String(row.id ?? `${row.numero_lote}-${index}`),
           active: row.principio_activo,
           brand: '',
+          pharmacy: row.farmacia_origen,
           lab: row.laboratorio,
           commune: row.comuna,
           batch: row.numero_lote,
@@ -352,84 +337,101 @@
       $('metricKg').innerHTML = `${impact.kg.toLocaleString('es-CL', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} <span class="text-base font-bold">kg</span>`;
     }
 
-    function openReservation(productId) {
+    async function openReservation(productId) {
+      if (!supabaseClient) {
+        showToast('No se puede reservar: no hay conexión con Supabase.');
+        return;
+      }
+      try {
+        const { data, error } = await supabaseClient.auth.getSession();
+        if (error) throw error;
+        currentUser = data.session?.user || null;
+      } catch (error) {
+        console.error('No se pudo comprobar la sesión antes de reservar:', error);
+        showToast(`No se pudo verificar tu sesión: ${error.message}`);
+        return;
+      }
+      renderAuthState();
+      if (!currentUser) {
+        openAuthModal('signIn');
+        showAuthMessage('Debes iniciar sesión con tu cuenta de farmacia para reservar un lote');
+        return;
+      }
+
       const product = products.find((item) => item.id === productId);
       if (!product || product.boxes < 1) return;
       activeProductId = productId;
-      selectedQuantity = 1;
       $('modalEyebrow').textContent = 'Reserva de lote';
-      $('modalTitle').textContent = 'Confirmar adquisición';
-      $('reservationContent').innerHTML = `<div class="flex items-start justify-between gap-4 rounded-lg bg-slate-50 p-3.5"><div><p class="font-display text-sm font-extrabold text-ink">${escapeHtml(product.active)}</p><p class="mt-1 text-xs text-slate-500">${escapeHtml(product.lab)} · ${escapeHtml(product.commune)}</p><p class="mt-1 font-mono text-[11px] text-slate-400">Lote ${escapeHtml(product.batch)} · vence ${new Date(product.expiry + 'T00:00:00').toLocaleDateString('es-CL')}</p></div><span class="shrink-0 rounded-md bg-white px-2 py-1 text-xs font-bold text-slate-600">${product.boxes} disp.</span></div>
-        <div class="mt-5 flex items-center justify-between"><div><p class="text-sm font-bold text-ink">Cantidad de cajas</p><p class="mt-0.5 text-xs text-slate-500">${formatCLP(product.offer)} por caja</p></div><div class="flex items-center gap-3"><button id="qtyMinus" type="button" aria-label="Reducir cantidad" class="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50"><i data-lucide="minus" class="h-4 w-4"></i></button><span id="qtyValue" class="w-7 text-center text-sm font-extrabold text-ink">1</span><button id="qtyPlus" type="button" aria-label="Aumentar cantidad" class="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50"><i data-lucide="plus" class="h-4 w-4"></i></button></div></div>
-        <div class="mt-5 space-y-2.5 border-t border-slate-100 pt-4 text-sm"><div class="flex justify-between text-slate-600"><span>Subtotal de medicamentos</span><span id="subtotalValue" class="font-semibold text-ink"></span></div><div class="flex justify-between text-slate-600"><span class="flex items-center gap-1.5">Logística local <i data-lucide="truck" class="h-3.5 w-3.5 text-slate-400"></i></span><span>${formatCLP(logisticsFee)}</span></div><div class="flex justify-between border-t border-slate-100 pt-3 font-extrabold text-ink"><span>Total estimado</span><span id="totalValue"></span></div></div>
-        <p class="mt-3 flex gap-2 rounded-lg border border-blue-100 bg-blue-50/70 p-3 text-[11px] leading-4 text-blue-900"><i data-lucide="info" class="h-4 w-4 shrink-0"></i>La reserva genera una guía digital de transferencia para trazabilidad. La entrega queda sujeta a validación sanitaria entre establecimientos.</p>
-        <button id="confirmReservation" type="button" class="mt-5 inline-flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-teal-700 text-sm font-bold text-white transition hover:bg-teal-800"><i data-lucide="lock-keyhole" class="h-4 w-4"></i>Confirmar reserva</button>`;
+      $('modalTitle').textContent = 'Confirmar reserva';
+      $('reservationContent').innerHTML = `<div class="rounded-lg bg-slate-50 p-4">
+        <p class="font-display text-base font-extrabold text-ink">${escapeHtml(product.active)}</p>
+        <p class="mt-1 text-sm text-slate-600">${escapeHtml(product.lab)} · ${escapeHtml(product.commune)}</p>
+        <p class="mt-1 text-xs text-slate-500">Farmacia de origen: ${escapeHtml(product.pharmacy || 'No especificada')}</p>
+        <p class="mt-2 font-mono text-xs text-slate-500">Lote ${escapeHtml(product.batch)} · vence ${new Date(product.expiry + 'T00:00:00').toLocaleDateString('es-CL')}</p>
+        <p class="mt-3 text-sm font-bold text-slate-700">${product.boxes} cajas · ${formatCLP(product.offer)} por caja</p>
+      </div>
+      <p class="mt-4 rounded-lg border border-blue-100 bg-blue-50/70 p-3 text-xs leading-5 text-blue-900">Al confirmar, este lote quedará reservado a tu cuenta y dejará de aparecer en el catálogo público. La coordinación del retiro queda pendiente.</p>
+      <button id="confirmReservation" type="button" class="mt-5 inline-flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-teal-700 text-sm font-bold text-white transition hover:bg-teal-800 disabled:cursor-wait disabled:opacity-60"><i data-lucide="lock-keyhole" class="h-4 w-4"></i>Confirmar reserva</button>`;
       $('reservationModal').classList.remove('hidden');
       $('reservationModal').classList.add('flex');
       document.body.classList.add('overflow-hidden');
       lucide.createIcons();
-      updateReservationTotal();
-      $('qtyMinus').addEventListener('click', () => { selectedQuantity = Math.max(1, selectedQuantity - 1); updateReservationTotal(); });
-      $('qtyPlus').addEventListener('click', () => { selectedQuantity = Math.min(product.boxes, selectedQuantity + 1); updateReservationTotal(); });
       $('confirmReservation').addEventListener('click', confirmReservation);
       $('closeModal').focus();
     }
 
-    function updateReservationTotal() {
+    async function confirmReservation() {
       const product = products.find((item) => item.id === activeProductId);
-      if (!product) return;
-      const subtotal = product.offer * selectedQuantity;
-      $('qtyValue').textContent = selectedQuantity;
-      $('subtotalValue').textContent = formatCLP(subtotal);
-      $('totalValue').textContent = formatCLP(subtotal + logisticsFee);
-    }
+      if (!product || !supabaseClient) return;
+      const button = $('confirmReservation');
+      button.disabled = true;
+      try {
+        const { data: sessionData, error: sessionError } = await supabaseClient.auth.getSession();
+        if (sessionError) {
+          showToast(`No se pudo verificar tu sesión: ${sessionError.message}`);
+          return;
+        }
+        const user = sessionData.session?.user;
+        if (!user?.email) {
+          currentUser = null;
+          renderAuthState();
+          closeReservation();
+          openAuthModal('signIn');
+          showAuthMessage('Debes iniciar sesión con tu cuenta de farmacia para reservar un lote');
+          return;
+        }
 
-    function makeGuideCode() {
-      const datePart = new Date().toISOString().slice(2, 10).replaceAll('-', '');
-      return `VLP-${datePart}-${Math.random().toString(36).slice(2, 7).toUpperCase()}`;
-    }
+        const { data, error } = await supabaseClient
+          .from('lotes_medicamentos')
+          .update({ estado: 'reservado', reservado_por: user.email })
+          .eq('id', product.id)
+          .eq('estado', 'disponible')
+          .select('id')
+          .maybeSingle();
+        if (error) {
+          showToast(`No se pudo reservar el lote: ${error.message}`);
+          return;
+        }
+        if (!data) {
+          showToast('Este lote ya no está disponible. Actualizamos el catálogo.');
+          await loadProducts();
+          closeReservation();
+          return;
+        }
 
-    function renderQr(seed) {
-      let state = 2166136261;
-      for (const char of seed) state = Math.imul(state ^ char.charCodeAt(0), 16777619) >>> 0;
-      const cells = [];
-      const finderAt = (x, y, ox, oy) => x >= ox && x < ox + 7 && y >= oy && y < oy + 7;
-      const finderOn = (x, y, ox, oy) => {
-        const dx = x - ox, dy = y - oy;
-        return dx === 0 || dx === 6 || dy === 0 || dy === 6 || (dx >= 2 && dx <= 4 && dy >= 2 && dy <= 4);
-      };
-      for (let y = 0; y < 21; y++) for (let x = 0; x < 21; x++) {
-        let on;
-        if (finderAt(x, y, 0, 0)) on = finderOn(x, y, 0, 0);
-        else if (finderAt(x, y, 14, 0)) on = finderOn(x, y, 14, 0);
-        else if (finderAt(x, y, 0, 14)) on = finderOn(x, y, 0, 14);
-        else { state ^= state << 13; state ^= state >>> 17; state ^= state << 5; on = (state & 3) !== 0; }
-        cells.push(`<span class="qr-cell${on ? ' on' : ''}"></span>`);
+        $('modalEyebrow').textContent = 'Reserva confirmada';
+        $('modalTitle').textContent = 'Lote reservado';
+        $('reservationContent').innerHTML = `<div class="text-center"><span class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-teal-50 text-teal-700"><i data-lucide="circle-check" class="h-6 w-6"></i></span><p class="font-display text-base font-extrabold text-ink">Reserva registrada correctamente</p><p class="mt-1 text-xs text-slate-500">${escapeHtml(product.active)} · ${escapeHtml(product.boxes)} cajas</p><p class="mt-3 inline-flex rounded-full bg-amber-50 px-3 py-1 text-xs font-bold text-amber-800 ring-1 ring-inset ring-amber-200">Reservado - Pendiente de retiro</p></div><button id="finishReservation" type="button" class="mt-5 inline-flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-ink text-sm font-bold text-white transition hover:bg-slate-800"><i data-lucide="check" class="h-4 w-4"></i>Listo</button>`;
+        lucide.createIcons();
+        $('finishReservation').addEventListener('click', closeReservation);
+        await loadProducts();
+        showToast('Lote reservado. Puedes consultar los detalles en «Mis Reservas».');
+      } catch (error) {
+        console.error('Error reservando lote en Supabase:', error);
+        showToast(`No se pudo completar la reserva: ${error.message}`);
+      } finally {
+        if ($('confirmReservation')) $('confirmReservation').disabled = false;
       }
-      return `<div class="qr-grid mx-auto" role="img" aria-label="Código QR ilustrativo para la guía ${escapeHtml(seed)}">${cells.join('')}</div>`;
-    }
-
-    function confirmReservation() {
-      const product = products.find((item) => item.id === activeProductId);
-      if (!product || product.boxes < selectedQuantity) return;
-      const quantity = selectedQuantity;
-      const subtotal = product.offer * quantity;
-      product.boxes -= quantity;
-      impact.capital += subtotal;
-      impact.boxes += quantity;
-      impact.reas += quantity * 2540;
-      impact.kg += quantity * 0.25;
-      const guide = makeGuideCode();
-      renderMetrics();
-      renderProducts();
-      $('modalEyebrow').textContent = 'Guía digital de transferencia';
-      $('modalTitle').textContent = 'Reserva confirmada';
-      $('reservationContent').innerHTML = `<div class="text-center"><span class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-teal-50 text-teal-700"><i data-lucide="circle-check" class="h-6 w-6"></i></span><p class="font-display text-base font-extrabold text-ink">Transferencia iniciada</p><p class="mt-1 text-xs text-slate-500">Presenta esta guía al coordinar la entrega entre establecimientos.</p></div>
-        <div class="mt-5 rounded-xl border border-slate-200 p-4"><div class="grid grid-cols-[1fr_auto] items-center gap-4"><div class="space-y-3 text-xs"><div><span class="block text-[10px] font-bold uppercase text-slate-400">Código de trazabilidad</span><span class="mt-1 block font-mono text-sm font-extrabold text-ink">${guide}</span></div><div><span class="block text-[10px] font-bold uppercase text-slate-400">Medicamento / lote</span><span class="mt-1 block font-semibold text-slate-700">${escapeHtml(product.active)}</span><span class="mt-0.5 block font-mono text-slate-500">${escapeHtml(product.batch)}</span></div><div><span class="block text-[10px] font-bold uppercase text-slate-400">Unidades reservadas</span><span class="mt-1 block font-semibold text-slate-700">${quantity} ${quantity === 1 ? 'caja' : 'cajas'} · ${formatCLP(subtotal + logisticsFee)} total estimado</span></div></div><div>${renderQr(guide)}</div></div><div class="mt-4 border-t border-dashed border-slate-200 pt-3 text-[10px] leading-4 text-slate-500">Origen: ${escapeHtml(product.commune)} · Laboratorio: ${escapeHtml(product.lab)} · Registro ISP: ${escapeHtml(product.isp)}</div></div>
-        <p class="mt-3 text-center text-[10px] leading-4 text-slate-400">QR ilustrativo de la guía. La plataforma no procesa pagos ni sustituye documentos sanitarios oficiales.</p><button id="finishGuide" type="button" class="mt-4 inline-flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-ink text-sm font-bold text-white transition hover:bg-slate-800"><i data-lucide="check" class="h-4 w-4"></i>Listo</button>`;
-      lucide.createIcons();
-      $('finishGuide').addEventListener('click', closeReservation);
-      showToast(`${quantity} ${quantity === 1 ? 'caja reservada' : 'cajas reservadas'} · métricas actualizadas`);
     }
 
     function closeReservation() {
@@ -524,6 +526,66 @@
       $('authUserControls').classList.toggle('hidden', !signedIn);
       $('authUserControls').classList.toggle('flex', signedIn);
       $('authUserEmail').textContent = currentUser?.email || '';
+    }
+
+    async function openMyReservations() {
+      if (!supabaseClient) {
+        showToast('No se pueden cargar las reservas: no hay conexión con Supabase.');
+        return;
+      }
+      const content = $('myReservationsContent');
+      content.innerHTML = '<p class="py-8 text-center text-sm text-slate-500">Cargando tus reservas…</p>';
+      $('myReservationsModal').classList.remove('hidden');
+      $('myReservationsModal').classList.add('flex');
+      document.body.classList.add('overflow-hidden');
+      lucide.createIcons();
+
+      try {
+        const { data: sessionData, error: sessionError } = await supabaseClient.auth.getSession();
+        if (sessionError) throw sessionError;
+        const user = sessionData.session?.user;
+        if (!user?.email) {
+          currentUser = null;
+          renderAuthState();
+          $('myReservationsModal').classList.add('hidden');
+          $('myReservationsModal').classList.remove('flex');
+          document.body.classList.remove('overflow-hidden');
+          openAuthModal('signIn');
+          showAuthMessage('Inicia sesión para consultar tus reservas.');
+          return;
+        }
+        currentUser = user;
+        renderAuthState();
+
+        const { data, error } = await supabaseClient
+          .from('lotes_medicamentos')
+          .select('id, principio_activo, laboratorio, cantidad_cajas, farmacia_origen, estado')
+          .eq('reservado_por', user.email)
+          .eq('estado', 'reservado')
+          .order('created_at', { ascending: false });
+        if (error) throw error;
+
+        if (!data.length) {
+          content.innerHTML = '<div class="rounded-xl border border-dashed border-slate-300 bg-slate-50 px-5 py-10 text-center"><i data-lucide="package-search" class="mx-auto h-8 w-8 text-slate-400"></i><p class="mt-3 font-semibold text-ink">Todavía no tienes reservas</p><p class="mt-1 text-xs text-slate-500">Cuando reserves un lote, aparecerá aquí.</p></div>';
+          lucide.createIcons();
+          return;
+        }
+
+        content.innerHTML = data.map((reservation) => `<article class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+          <div class="flex flex-col justify-between gap-3 sm:flex-row sm:items-start">
+            <div><h3 class="font-display text-base font-extrabold text-ink">${escapeHtml(reservation.principio_activo)}</h3><p class="mt-1 text-sm text-slate-600">${escapeHtml(reservation.laboratorio)}</p></div>
+            <span class="inline-flex w-fit rounded-full bg-amber-50 px-3 py-1 text-xs font-bold text-amber-800 ring-1 ring-inset ring-amber-200">Reservado - Pendiente de retiro</span>
+          </div>
+          <div class="mt-4 grid gap-2 border-t border-slate-100 pt-3 text-xs text-slate-600 sm:grid-cols-2">
+            <p><span class="font-bold text-slate-700">Cantidad:</span> ${Number(reservation.cantidad_cajas)} cajas</p>
+            <p><span class="font-bold text-slate-700">Farmacia de origen:</span> ${escapeHtml(reservation.farmacia_origen || 'No especificada')}</p>
+          </div>
+        </article>`).join('');
+        lucide.createIcons();
+      } catch (error) {
+        console.error('Error cargando Mis Reservas:', error);
+        content.innerHTML = `<p class="rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-800">No se pudieron cargar tus reservas: ${escapeHtml(error.message)}</p>`;
+      }
     }
 
     async function submitAuth(event) {
@@ -738,7 +800,7 @@
       const original = Number($('originalInput').value);
       const offer = Number($('offerInput').value);
       const boxes = Number($('boxesInput').value);
-      if (!Number.isInteger(boxes) || boxes < 1 || original <= 0 || offer <= 0 || offer >= original) {
+      if (!Number.isInteger(boxes) || boxes < 1 || !Number.isInteger(offer) || original <= 0 || offer <= 0 || offer >= original) {
         showToast('Revisa cantidades y precios antes de publicar.');
         return;
       }
@@ -754,13 +816,15 @@
 
       const payload = {
         principio_activo: $('activeInput').value.trim(),
+        farmacia_origen: $('pharmacyInput').value.trim(),
         laboratorio: $('sellerLab').value,
         registro_isp: $('ispInput').value.trim(),
         numero_lote: $('batchInput').value.trim(),
         fecha_vencimiento: $('expiryInput').value,
         cantidad_cajas: boxes,
         precio_oferta: offer,
-        comuna: $('sellerCommune').value
+        comuna: $('sellerCommune').value,
+        estado: 'disponible'
       };
       const button = $('publishButton');
       button.disabled = true;
@@ -808,6 +872,15 @@
     });
     $('authForm').addEventListener('submit', submitAuth);
     $('authLogoutButton').addEventListener('click', signOut);
+    $('myReservationsButton').addEventListener('click', openMyReservations);
+    $('myReservationsClose').addEventListener('click', () => {
+      $('myReservationsModal').classList.add('hidden');
+      $('myReservationsModal').classList.remove('flex');
+      document.body.classList.remove('overflow-hidden');
+    });
+    $('myReservationsModal').addEventListener('click', (event) => {
+      if (event.target === $('myReservationsModal')) $('myReservationsClose').click();
+    });
     $('searchInput').addEventListener('input', renderProducts);
     $('communeFilter').addEventListener('change', renderProducts);
     $('labFilter').addEventListener('change', renderProducts);
@@ -822,16 +895,19 @@
       if (event.key !== 'Escape') return;
       if (!$('authModal').classList.contains('hidden')) closeAuthModal();
       if (!$('reservationModal').classList.contains('hidden')) closeReservation();
+      if (!$('myReservationsModal').classList.contains('hidden')) $('myReservationsClose').click();
     });
     $('sellerForm').addEventListener('submit', publishProduct);
     ['activeInput', 'expiryInput', 'offerInput', 'originalInput'].forEach((id) => $(id).addEventListener('input', refreshValidation));
     $('expiryInput').addEventListener('change', refreshValidation);
-    $('productGrid').innerHTML = '';
-    renderMetrics();
-    renderProducts();
-    refreshValidation();
-    initializeAuth();
-    loadProducts();
+    document.addEventListener('DOMContentLoaded', () => {
+      $('productGrid').innerHTML = '';
+      renderMetrics();
+      renderProducts();
+      refreshValidation();
+      initializeAuth();
+      loadProducts();
+    }, { once: true });
   </script>
 
 
