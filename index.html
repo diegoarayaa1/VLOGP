@@ -53,9 +53,10 @@
             <span id="sellerModeLabel" class="text-xs font-semibold sm:inline text-slate-400">Vendedor</span>
           </div>
           <button id="authOpenButton" type="button" class="inline-flex h-9 items-center justify-center rounded-lg border border-slate-200 px-3 text-xs font-bold text-ink transition hover:bg-slate-50">Iniciar sesión</button>
-          <div id="authUserControls" class="hidden items-center gap-2">
+          <div id="authUserControls" class="hidden flex-wrap items-center gap-2">
             <span id="authUserEmail" class="max-w-[180px] truncate text-xs font-semibold text-slate-600"></span>
             <button id="myReservationsButton" type="button" class="inline-flex h-9 items-center justify-center rounded-lg border border-teal-200 bg-teal-50 px-3 text-xs font-bold text-teal-800 transition hover:bg-teal-100">Mis Reservas</button>
+            <button id="myPublicationsButton" type="button" class="inline-flex h-9 items-center justify-center rounded-lg border border-blue-200 bg-blue-50 px-3 text-xs font-bold text-blue-800 transition hover:bg-blue-100">Mis Publicaciones</button>
             <button id="authLogoutButton" type="button" class="inline-flex h-9 items-center justify-center rounded-lg border border-slate-200 px-3 text-xs font-bold text-ink transition hover:bg-slate-50">Cerrar sesión</button>
           </div>
         </div>
@@ -173,6 +174,33 @@
     </div>
   </div>
 
+  <div id="myPublicationsModal" class="modal-backdrop fixed inset-0 z-[60] items-center justify-center overflow-y-auto bg-slate-950/50 p-4 hidden" role="dialog" aria-modal="true" aria-labelledby="myPublicationsTitle">
+    <div class="my-auto w-full max-w-3xl overflow-hidden rounded-2xl bg-white shadow-2xl">
+      <div class="flex items-start justify-between border-b border-slate-100 px-5 py-4">
+        <div><p class="text-[11px] font-bold uppercase text-medical">Cuenta V-LOG PHARMA</p><h2 id="myPublicationsTitle" class="mt-1 font-display text-lg font-extrabold text-ink">Mis Publicaciones</h2></div>
+        <button id="myPublicationsClose" type="button" aria-label="Cerrar Mis Publicaciones" class="rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-ink"><i data-lucide="x" class="h-5 w-5"></i></button>
+      </div>
+      <div id="myPublicationsContent" class="max-h-[70vh] space-y-3 overflow-y-auto p-5" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <div id="editPublicationModal" class="modal-backdrop fixed inset-0 z-[70] items-center justify-center overflow-y-auto bg-slate-950/50 p-4 hidden" role="dialog" aria-modal="true" aria-labelledby="editPublicationTitle">
+    <form id="editPublicationForm" class="my-auto w-full max-w-md rounded-2xl bg-white p-5 shadow-2xl">
+      <div class="mb-5 flex items-start justify-between">
+        <div><p class="text-[11px] font-bold uppercase text-medical">Actualizar lote</p><h2 id="editPublicationTitle" class="mt-1 font-display text-lg font-extrabold text-ink">Editar stock y precio</h2></div>
+        <button id="editPublicationClose" type="button" aria-label="Cerrar edición" class="rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-ink"><i data-lucide="x" class="h-5 w-5"></i></button>
+      </div>
+      <div class="space-y-4">
+        <label class="block"><span class="mb-1.5 block text-xs font-bold text-slate-700">Cantidad de cajas</span><input id="editPublicationBoxes" required type="number" min="1" step="1" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
+        <label class="block"><span class="mb-1.5 block text-xs font-bold text-slate-700">Precio de oferta por caja (CLP)</span><input id="editPublicationPrice" required type="number" min="1" step="1" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
+        <div class="flex justify-end gap-2 pt-2">
+          <button id="editPublicationCancel" type="button" class="h-10 rounded-lg border border-slate-200 px-4 text-xs font-bold text-slate-700 hover:bg-slate-50">Cancelar</button>
+          <button id="editPublicationSave" type="submit" class="h-10 rounded-lg bg-teal-700 px-4 text-xs font-bold text-white hover:bg-teal-800 disabled:opacity-60">Guardar cambios</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
   <div id="reservationModal" class="modal-backdrop fixed inset-0 z-50 items-center justify-center overflow-y-auto bg-slate-950/50 p-4 hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="my-auto w-full max-w-lg overflow-hidden rounded-2xl bg-white shadow-2xl">
       <div class="flex items-start justify-between border-b border-slate-100 px-5 py-4"><div><div id="modalEyebrow" class="text-[11px] font-bold uppercase text-teal-700">Guía digital de transferencia</div><h2 id="modalTitle" class="mt-1 font-display text-lg font-extrabold text-ink">Reserva confirmada</h2></div><button id="closeModal" type="button" aria-label="Cerrar" class="rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-ink"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" aria-hidden="true" class="lucide lucide-x h-5 w-5"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></div>
@@ -210,6 +238,8 @@
     let catalogMessage = '';
     let catalogLoadFailed = false;
     let activeProductId = null;
+    let activePublicationId = null;
+    let currentPublications = [];
     let toastTimer;
     const $ = (id) => document.getElementById(id);
     const formatCLP = (value) => '$' + Math.round(value).toLocaleString('es-CL');
@@ -244,7 +274,7 @@
           <div class="space-y-3 px-4 py-4"><div class="flex flex-wrap items-center justify-between gap-2"><span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold ring-1 ring-inset ${expiry.color}"><span class="h-1.5 w-1.5 rounded-full ${expiry.dot}"></span>${expiry.text}</span><span class="inline-flex items-center gap-1 text-xs font-medium text-slate-500"><i data-lucide="map-pin" class="h-3.5 w-3.5"></i>${escapeHtml(product.commune)}</span></div>
           <div class="grid grid-cols-2 gap-2 rounded-lg bg-slate-50 px-3 py-2.5 text-xs"><div><span class="block text-[10px] font-semibold uppercase text-slate-400">Disponibles</span><span class="mt-0.5 block font-bold text-slate-700">${product.boxes} cajas</span></div><div class="text-right"><span class="block text-[10px] font-semibold uppercase text-slate-400">N.º de lote</span><span class="mt-0.5 block font-mono font-semibold text-slate-700">${escapeHtml(product.batch)}</span></div></div>
           <div class="rounded-lg border border-teal-100 bg-teal-50/70 px-3 py-2 text-xs text-teal-900"><span class="font-bold">Publicado por:</span> ${escapeHtml(product.pharmacy || 'Farmacia no especificada')}</div>
-          <div class="flex items-end justify-between gap-3 pt-1"><div><span class="block text-[11px] text-slate-400">Precio por caja${product.original > product.offer ? ` <span class="ml-1 line-through">${formatCLP(product.original)}</span>` : ''}</span><strong class="mt-0.5 block font-display text-xl font-extrabold text-ink">${formatCLP(product.offer)} <span class="font-sans text-[11px] font-semibold text-slate-400">CLP</span></strong></div><button type="button" data-reserve="${escapeHtml(product.id)}" class="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-teal-700 px-3.5 text-xs font-bold text-white transition hover:bg-teal-800"><i data-lucide="shopping-bag" class="h-4 w-4"></i>Solicitar / Reservar</button></div></div>
+          <div class="flex items-end justify-between gap-3 pt-1"><div><span class="block text-[11px] text-slate-400">Precio por caja${product.original > product.offer ? ` <span class="ml-1 line-through">${formatCLP(product.original)}</span>` : ''}</span><strong class="mt-0.5 block font-display text-xl font-extrabold text-ink">${formatCLP(product.offer)} <span class="font-sans text-[11px] font-semibold text-slate-400">CLP</span></strong></div><button type="button" data-reserve="${escapeHtml(product.id)}" ${product.isMine ? 'disabled aria-disabled="true"' : ''} class="inline-flex h-10 items-center justify-center gap-2 rounded-lg px-3.5 text-xs font-bold transition ${product.isMine ? 'cursor-not-allowed bg-slate-100 text-slate-500' : 'bg-teal-700 text-white hover:bg-teal-800'}"><i data-lucide="${product.isMine ? 'house' : 'shopping-bag'}" class="h-4 w-4"></i>${product.isMine ? 'Tu publicación' : 'Solicitar / Reservar'}</button></div></div>
           <div class="flex items-center gap-1.5 border-t border-slate-100 px-4 py-2.5 text-[10px] text-slate-400"><i data-lucide="file-check-2" class="h-3.5 w-3.5"></i>Registro ISP ${escapeHtml(product.isp)} · Director Técnico</div></article>`;
       }).join('');
       $('emptyMessage').textContent = catalogLoadFailed
@@ -299,6 +329,17 @@
           return;
         }
 
+        let ownProductIds = new Set();
+        if (currentUser?.email && data.length) {
+          const { data: ownLots, error: ownLotsError } = await supabaseClient
+            .from('lotes_medicamentos')
+            .select('id')
+            .eq('vendedor_id', currentUser.id)
+            .eq('estado', 'disponible');
+          if (ownLotsError) throw ownLotsError;
+          ownProductIds = new Set(ownLots.map((lot) => String(lot.id)));
+        }
+
         catalogLoadFailed = false;
         catalogMessage = '';
         const tones = ['teal', 'blue', 'amber', 'cyan', 'rose', 'green'];
@@ -315,6 +356,7 @@
           boxes: Number(row.cantidad_cajas),
           original: null,
           offer: Number(row.precio_oferta),
+          isMine: ownProductIds.has(String(row.id)),
           tone: tones[index % tones.length],
           icon: 'pill'
         }));
@@ -360,6 +402,10 @@
 
       const product = products.find((item) => item.id === productId);
       if (!product || product.boxes < 1) return;
+      if (product.isMine) {
+        showToast('No puedes reservar un lote publicado por tu propia cuenta.');
+        return;
+      }
       activeProductId = productId;
       $('modalEyebrow').textContent = 'Reserva de lote';
       $('modalTitle').textContent = 'Confirmar reserva';
@@ -526,6 +572,7 @@
       $('authUserControls').classList.toggle('hidden', !signedIn);
       $('authUserControls').classList.toggle('flex', signedIn);
       $('authUserEmail').textContent = currentUser?.email || '';
+      renderProducts();
     }
 
     async function openMyReservations() {
@@ -585,6 +632,193 @@
       } catch (error) {
         console.error('Error cargando Mis Reservas:', error);
         content.innerHTML = `<p class="rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-800">No se pudieron cargar tus reservas: ${escapeHtml(error.message)}</p>`;
+      }
+    }
+
+    function closeMyPublications() {
+      $('myPublicationsModal').classList.add('hidden');
+      $('myPublicationsModal').classList.remove('flex');
+      document.body.classList.remove('overflow-hidden');
+    }
+
+    async function openMyPublications() {
+      const content = $('myPublicationsContent');
+      content.innerHTML = '<p class="py-8 text-center text-sm text-slate-500">Cargando tus publicaciones…</p>';
+      $('myPublicationsModal').classList.remove('hidden');
+      $('myPublicationsModal').classList.add('flex');
+      document.body.classList.add('overflow-hidden');
+      lucide.createIcons();
+
+      try {
+        const { data: sessionData, error: sessionError } = await supabaseClient.auth.getSession();
+        if (sessionError) throw sessionError;
+        const user = sessionData.session?.user;
+        if (!user?.email) {
+          currentUser = null;
+          renderAuthState();
+          closeMyPublications();
+          openAuthModal('signIn');
+          showAuthMessage('Inicia sesión para consultar tus publicaciones.');
+          return;
+        }
+        currentUser = user;
+        renderAuthState();
+
+        const { data, error } = await supabaseClient
+          .from('lotes_medicamentos')
+          .select('id, principio_activo, laboratorio, numero_lote, cantidad_cajas, precio_oferta, fecha_vencimiento, estado, reservado_por')
+          .eq('vendedor_id', user.id)
+          .order('created_at', { ascending: false });
+        if (error) throw error;
+        currentPublications = data;
+        renderMyPublications();
+      } catch (error) {
+        console.error('Error cargando Mis Publicaciones:', error);
+        currentPublications = [];
+        content.innerHTML = `<p class="rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-800">No se pudieron cargar tus publicaciones: ${escapeHtml(error.message)}</p>`;
+      }
+    }
+
+    function renderMyPublications() {
+      const content = $('myPublicationsContent');
+      if (!currentPublications.length) {
+        content.innerHTML = '<div class="rounded-xl border border-dashed border-slate-300 bg-slate-50 px-5 py-10 text-center"><i data-lucide="package-search" class="mx-auto h-8 w-8 text-slate-400"></i><p class="mt-3 font-semibold text-ink">Todavía no tienes publicaciones</p><p class="mt-1 text-xs text-slate-500">Los lotes que publiques aparecerán aquí.</p></div>';
+        lucide.createIcons();
+        return;
+      }
+
+      content.innerHTML = currentPublications.map((publication) => {
+        const reserved = publication.estado === 'reservado';
+        return `<article class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+          <div class="flex flex-col justify-between gap-3 sm:flex-row sm:items-start">
+            <div><h3 class="font-display text-base font-extrabold text-ink">${escapeHtml(publication.principio_activo)}</h3><p class="mt-1 text-sm text-slate-600">${escapeHtml(publication.laboratorio)} · Lote ${escapeHtml(publication.numero_lote)}</p></div>
+            <span class="inline-flex w-fit rounded-full px-3 py-1 text-xs font-bold ring-1 ring-inset ${reserved ? 'bg-amber-50 text-amber-800 ring-amber-200' : 'bg-emerald-50 text-emerald-800 ring-emerald-200'}">${reserved ? 'Reservado' : 'Disponible'}</span>
+          </div>
+          ${reserved ? `<p class="mt-3 rounded-lg border border-amber-100 bg-amber-50 px-3 py-2 text-xs text-amber-900"><span class="font-bold">Solicitado por:</span> ${escapeHtml(publication.reservado_por || 'Usuario no especificado')}</p>` : ''}
+          <div class="mt-4 grid gap-2 border-t border-slate-100 pt-3 text-xs text-slate-600 sm:grid-cols-2">
+            <p><span class="font-bold text-slate-700">Stock:</span> ${Number(publication.cantidad_cajas)} cajas</p>
+            <p><span class="font-bold text-slate-700">Precio:</span> ${formatCLP(Number(publication.precio_oferta))} CLP por caja</p>
+            <p><span class="font-bold text-slate-700">Caducidad:</span> ${new Date(publication.fecha_vencimiento + 'T00:00:00').toLocaleDateString('es-CL')}</p>
+          </div>
+          <div class="mt-4 flex flex-wrap justify-end gap-2">
+            ${reserved ? `<button type="button" data-release-publication="${escapeHtml(publication.id)}" class="h-9 rounded-lg border border-amber-200 bg-amber-50 px-3 text-xs font-bold text-amber-800 transition hover:bg-amber-100">Liberar Reserva</button>` : ''}
+            <button type="button" data-edit-publication="${escapeHtml(publication.id)}" class="h-9 rounded-lg border border-slate-200 px-3 text-xs font-bold text-slate-700 transition hover:bg-slate-50">Editar</button>
+            <button type="button" data-delete-publication="${escapeHtml(publication.id)}" class="h-9 rounded-lg border border-rose-200 bg-rose-50 px-3 text-xs font-bold text-rose-700 transition hover:bg-rose-100">Eliminar</button>
+          </div>
+        </article>`;
+      }).join('');
+      lucide.createIcons();
+    }
+
+    async function refreshPublicationViews() {
+      await loadProducts();
+      await openMyPublications();
+    }
+
+    async function getPublicationUser() {
+      const { data, error } = await supabaseClient.auth.getSession();
+      if (error) throw error;
+      const user = data.session?.user;
+      if (!user?.email) throw new Error('Tu sesión expiró. Inicia sesión de nuevo.');
+      currentUser = user;
+      renderAuthState();
+      return user;
+    }
+
+    async function releasePublication(id) {
+      try {
+        const user = await getPublicationUser();
+        const { data, error } = await supabaseClient
+          .from('lotes_medicamentos')
+          .update({ estado: 'disponible', reservado_por: null })
+          .eq('id', id)
+          .eq('vendedor_id', user.id)
+          .eq('estado', 'reservado')
+          .select('id')
+          .maybeSingle();
+        if (error) throw error;
+        if (!data) {
+          showToast('No se pudo liberar la reserva; comprueba el estado del lote.');
+          await refreshPublicationViews();
+          return;
+        }
+        showToast('Reserva liberada. El lote vuelve al catálogo.');
+        await refreshPublicationViews();
+      } catch (error) {
+        console.error('Error liberando publicación reservada:', error);
+        showToast(`No se pudo liberar la reserva: ${error.message}`);
+      }
+    }
+
+    function openEditPublication(id) {
+      const publication = currentPublications.find((item) => String(item.id) === String(id));
+      if (!publication) return;
+      activePublicationId = String(id);
+      $('editPublicationBoxes').value = publication.cantidad_cajas;
+      $('editPublicationPrice').value = publication.precio_oferta;
+      $('editPublicationModal').classList.remove('hidden');
+      $('editPublicationModal').classList.add('flex');
+      document.body.classList.add('overflow-hidden');
+      $('editPublicationBoxes').focus();
+    }
+
+    function closeEditPublication() {
+      $('editPublicationModal').classList.add('hidden');
+      $('editPublicationModal').classList.remove('flex');
+      activePublicationId = null;
+      if ($('myPublicationsModal').classList.contains('hidden')) document.body.classList.remove('overflow-hidden');
+    }
+
+    async function savePublicationEdit(event) {
+      event.preventDefault();
+      const boxes = Number($('editPublicationBoxes').value);
+      const price = Number($('editPublicationPrice').value);
+      if (!Number.isInteger(boxes) || boxes < 1 || !Number.isInteger(price) || price < 1) {
+        showToast('La cantidad y el precio deben ser números enteros mayores que cero.');
+        return;
+      }
+      const button = $('editPublicationSave');
+      button.disabled = true;
+      try {
+        const user = await getPublicationUser();
+        const { data, error } = await supabaseClient
+          .from('lotes_medicamentos')
+          .update({ cantidad_cajas: boxes, precio_oferta: price })
+          .eq('id', activePublicationId)
+          .eq('vendedor_id', user.id)
+          .select('id')
+          .maybeSingle();
+        if (error) throw error;
+        if (!data) throw new Error('La publicación no existe o no tienes permiso para editarla.');
+        closeEditPublication();
+        showToast('Publicación actualizada.');
+        await refreshPublicationViews();
+      } catch (error) {
+        console.error('Error actualizando publicación:', error);
+        showToast(`No se pudo actualizar la publicación: ${error.message}`);
+      } finally {
+        button.disabled = false;
+      }
+    }
+
+    async function deletePublication(id) {
+      if (!window.confirm('¿Eliminar esta publicación? Esta acción no se puede deshacer.')) return;
+      try {
+        const user = await getPublicationUser();
+        const { data, error } = await supabaseClient
+          .from('lotes_medicamentos')
+          .delete()
+          .eq('id', id)
+          .eq('vendedor_id', user.id)
+          .select('id')
+          .maybeSingle();
+        if (error) throw error;
+        if (!data) throw new Error('La publicación no existe o no tienes permiso para eliminarla.');
+        showToast('Publicación eliminada.');
+        await refreshPublicationViews();
+      } catch (error) {
+        console.error('Error eliminando publicación:', error);
+        showToast(`No se pudo eliminar la publicación: ${error.message}`);
       }
     }
 
@@ -660,6 +894,7 @@
 
         currentUser = result.data.user;
         renderAuthState();
+        await loadProducts();
         closeAuthModal();
         $('authForm').reset();
         showToast(submitMode === 'signIn' ? 'Sesión iniciada.' : 'Cuenta creada y sesión iniciada.');
@@ -682,6 +917,7 @@
         supabaseClient.auth.onAuthStateChange((event, session) => {
           currentUser = session?.user || null;
           renderAuthState();
+          loadProducts();
           if ((event === 'PASSWORD_RECOVERY' || (isRecoveryRedirect && session)) && !recoveryPromptShown) {
             recoveryPromptShown = true;
             openAuthModal('updatePassword');
@@ -830,6 +1066,18 @@
       button.disabled = true;
       button.setAttribute('aria-busy', 'true');
       try {
+        const { data: sessionData, error: sessionError } = await supabaseClient.auth.getSession();
+        if (sessionError) throw sessionError;
+        const user = sessionData.session?.user;
+        if (!user?.email) {
+          currentUser = null;
+          renderAuthState();
+          showToast('Inicia sesión para publicar un lote.');
+          openAuthModal('signIn');
+          return;
+        }
+        currentUser = user;
+        payload.publicado_por = user.email;
         const { error } = await supabaseClient.from('lotes_medicamentos').insert(payload);
         if (error) {
           showToast(`No se pudo publicar el lote: ${error.message}`);
@@ -873,6 +1121,7 @@
     $('authForm').addEventListener('submit', submitAuth);
     $('authLogoutButton').addEventListener('click', signOut);
     $('myReservationsButton').addEventListener('click', openMyReservations);
+    $('myPublicationsButton').addEventListener('click', openMyPublications);
     $('myReservationsClose').addEventListener('click', () => {
       $('myReservationsModal').classList.add('hidden');
       $('myReservationsModal').classList.remove('flex');
@@ -881,13 +1130,31 @@
     $('myReservationsModal').addEventListener('click', (event) => {
       if (event.target === $('myReservationsModal')) $('myReservationsClose').click();
     });
+    $('myPublicationsClose').addEventListener('click', closeMyPublications);
+    $('myPublicationsModal').addEventListener('click', (event) => {
+      if (event.target === $('myPublicationsModal')) closeMyPublications();
+    });
+    $('myPublicationsContent').addEventListener('click', (event) => {
+      const releaseButton = event.target.closest('[data-release-publication]');
+      const editButton = event.target.closest('[data-edit-publication]');
+      const deleteButton = event.target.closest('[data-delete-publication]');
+      if (releaseButton) releasePublication(releaseButton.dataset.releasePublication);
+      if (editButton) openEditPublication(editButton.dataset.editPublication);
+      if (deleteButton) deletePublication(deleteButton.dataset.deletePublication);
+    });
+    $('editPublicationClose').addEventListener('click', closeEditPublication);
+    $('editPublicationCancel').addEventListener('click', closeEditPublication);
+    $('editPublicationModal').addEventListener('click', (event) => {
+      if (event.target === $('editPublicationModal')) closeEditPublication();
+    });
+    $('editPublicationForm').addEventListener('submit', savePublicationEdit);
     $('searchInput').addEventListener('input', renderProducts);
     $('communeFilter').addEventListener('change', renderProducts);
     $('labFilter').addEventListener('change', renderProducts);
     $('clearFilters').addEventListener('click', () => { $('searchInput').value = ''; $('communeFilter').value = ''; $('labFilter').value = ''; renderProducts(); });
     $('productGrid').addEventListener('click', (event) => {
       const button = event.target.closest('[data-reserve]');
-      if (button) openReservation(button.dataset.reserve);
+      if (button && !button.disabled) openReservation(button.dataset.reserve);
     });
     $('closeModal').addEventListener('click', closeReservation);
     $('reservationModal').addEventListener('click', (event) => { if (event.target === $('reservationModal')) closeReservation(); });
@@ -896,6 +1163,8 @@
       if (!$('authModal').classList.contains('hidden')) closeAuthModal();
       if (!$('reservationModal').classList.contains('hidden')) closeReservation();
       if (!$('myReservationsModal').classList.contains('hidden')) $('myReservationsClose').click();
+      if (!$('editPublicationModal').classList.contains('hidden')) closeEditPublication();
+      else if (!$('myPublicationsModal').classList.contains('hidden')) closeMyPublications();
     });
     $('sellerForm').addEventListener('submit', publishProduct);
     ['activeInput', 'expiryInput', 'offerInput', 'originalInput'].forEach((id) => $(id).addEventListener('input', refreshValidation));
