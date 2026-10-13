@@ -208,7 +208,10 @@
     const recoveryQueryParams = new URLSearchParams(window.location.search);
     const isRecoveryRedirect = recoveryHashParams.get('type') === 'recovery'
       || recoveryQueryParams.get('type') === 'recovery'
-      || recoveryQueryParams.has('code');
+      || recoveryQueryParams.has('code')
+      || recoveryQueryParams.has('token_hash')
+      || recoveryHashParams.has('access_token')
+      || recoveryQueryParams.has('access_token');
     const supabaseConfigured = SUPABASE_URL.startsWith('https://')
       && !SUPABASE_URL.includes('PEGA_AQUÍ')
       && SUPABASE_ANON_KEY.length > 20
@@ -630,13 +633,36 @@
           showToast(`No se pudo recuperar la sesión: ${error.message}`);
           return;
         }
-        currentUser = data.session?.user || null;
+
+        let session = data.session;
+        if (!session && recoveryQueryParams.has('code')) {
+          const { data: exchangeData, error: exchangeError } = await supabaseClient.auth.exchangeCodeForSession(recoveryQueryParams.get('code'));
+          if (exchangeError) {
+            console.error('No se pudo validar el enlace de recuperación:', exchangeError);
+            showToast(`No se pudo validar el enlace de recuperación: ${exchangeError.message}`);
+            return;
+          }
+          session = exchangeData.session;
+        } else if (!session && recoveryQueryParams.get('type') === 'recovery' && recoveryQueryParams.has('token_hash')) {
+          const { data: verifyData, error: verifyError } = await supabaseClient.auth.verifyOtp({
+            type: 'recovery',
+            token_hash: recoveryQueryParams.get('token_hash')
+          });
+          if (verifyError) {
+            console.error('No se pudo validar el enlace de recuperación:', verifyError);
+            showToast(`No se pudo validar el enlace de recuperación: ${verifyError.message}`);
+            return;
+          }
+          session = verifyData.session;
+        }
+
+        currentUser = session?.user || null;
         renderAuthState();
-        if (isRecoveryRedirect && data.session && !recoveryPromptShown) {
+        if (isRecoveryRedirect && session && !recoveryPromptShown) {
           recoveryPromptShown = true;
           openAuthModal('updatePassword');
           showAuthMessage('Escribe y confirma tu nueva contraseña.');
-        } else if (isRecoveryRedirect && !data.session) {
+        } else if (isRecoveryRedirect && !session) {
           openAuthModal('signIn');
           showAuthMessage('El enlace de recuperación expiró o no es válido. Solicita uno nuevo e intenta abrirlo desde el mismo navegador.');
         }
