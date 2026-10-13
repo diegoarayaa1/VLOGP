@@ -627,11 +627,64 @@
             <p><span class="font-bold text-slate-700">Cantidad:</span> ${Number(reservation.cantidad_cajas)} cajas</p>
             <p><span class="font-bold text-slate-700">Farmacia de origen:</span> ${escapeHtml(reservation.farmacia_origen || 'No especificada')}</p>
           </div>
+          <div class="mt-4 flex justify-end">
+            <button type="button" data-cancel-reservation="${escapeHtml(reservation.id)}" class="inline-flex h-9 items-center justify-center gap-2 rounded-lg border border-rose-200 bg-rose-50 px-3 text-xs font-bold text-rose-700 transition hover:bg-rose-100 disabled:cursor-wait disabled:opacity-60">
+              <i data-lucide="circle-x" class="h-4 w-4"></i>Cancelar Reserva
+            </button>
+          </div>
         </article>`).join('');
         lucide.createIcons();
       } catch (error) {
         console.error('Error cargando Mis Reservas:', error);
         content.innerHTML = `<p class="rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-800">No se pudieron cargar tus reservas: ${escapeHtml(error.message)}</p>`;
+      }
+    }
+
+    async function cancelReservation(id, button) {
+      if (!window.confirm('¿Estás seguro de que deseas cancelar esta reserva?')) return;
+      if (!supabaseClient) {
+        showToast('No se puede cancelar la reserva: no hay conexión con Supabase.');
+        return;
+      }
+
+      button.disabled = true;
+      try {
+        const { data: sessionData, error: sessionError } = await supabaseClient.auth.getSession();
+        if (sessionError) throw sessionError;
+        const user = sessionData.session?.user;
+        if (!user?.email) {
+          currentUser = null;
+          renderAuthState();
+          $('myReservationsClose').click();
+          openAuthModal('signIn');
+          showAuthMessage('Inicia sesión para cancelar una reserva.');
+          return;
+        }
+        currentUser = user;
+        renderAuthState();
+
+        const { data, error } = await supabaseClient
+          .from('lotes_medicamentos')
+          .update({ estado: 'disponible', reservado_por: null })
+          .eq('id', id)
+          .eq('estado', 'reservado')
+          .eq('reservado_por', user.email)
+          .select('id')
+          .maybeSingle();
+        if (error) throw error;
+        if (!data) {
+          showToast('No se pudo cancelar: la reserva ya no está activa o no pertenece a tu cuenta.');
+          await Promise.all([loadProducts(), openMyReservations()]);
+          return;
+        }
+
+        showToast('Reserva cancelada. El lote volvió al catálogo disponible.');
+        await Promise.all([loadProducts(), openMyReservations()]);
+      } catch (error) {
+        console.error('Error cancelando reserva en Supabase:', error);
+        showToast(`No se pudo cancelar la reserva: ${error.message}`);
+      } finally {
+        if (button.isConnected) button.disabled = false;
       }
     }
 
@@ -1129,6 +1182,10 @@
     });
     $('myReservationsModal').addEventListener('click', (event) => {
       if (event.target === $('myReservationsModal')) $('myReservationsClose').click();
+    });
+    $('myReservationsContent').addEventListener('click', (event) => {
+      const button = event.target.closest('[data-cancel-reservation]');
+      if (button) cancelReservation(button.dataset.cancelReservation, button);
     });
     $('myPublicationsClose').addEventListener('click', closeMyPublications);
     $('myPublicationsModal').addEventListener('click', (event) => {
