@@ -57,6 +57,7 @@
             <span id="authUserEmail" class="max-w-[180px] truncate text-xs font-semibold text-slate-600"></span>
             <button id="myReservationsButton" type="button" class="inline-flex h-9 items-center justify-center rounded-lg border border-teal-200 bg-teal-50 px-3 text-xs font-bold text-teal-800 transition hover:bg-teal-100">Mis Reservas</button>
             <button id="myPublicationsButton" type="button" class="inline-flex h-9 items-center justify-center rounded-lg border border-blue-200 bg-blue-50 px-3 text-xs font-bold text-blue-800 transition hover:bg-blue-100">Mis Publicaciones</button>
+            <button id="adminPanelButton" type="button" class="hidden inline-flex h-9 items-center justify-center gap-1.5 rounded-lg bg-indigo-800 px-3 text-xs font-bold text-white shadow-sm transition hover:bg-indigo-900"><i data-lucide="shield-check" class="h-4 w-4"></i>Panel Admin</button>
             <button id="authLogoutButton" type="button" class="inline-flex h-9 items-center justify-center rounded-lg border border-slate-200 px-3 text-xs font-bold text-ink transition hover:bg-slate-50">Cerrar sesión</button>
           </div>
         </div>
@@ -201,6 +202,43 @@
     </form>
   </div>
 
+  <div id="adminPanelModal" class="modal-backdrop fixed inset-0 z-[80] items-start justify-center overflow-y-auto bg-slate-950/60 p-3 sm:p-5 hidden" role="dialog" aria-modal="true" aria-labelledby="adminPanelTitle">
+    <section class="my-4 w-full max-w-7xl overflow-hidden rounded-2xl bg-white shadow-2xl sm:my-6">
+      <header class="flex items-start justify-between gap-4 border-b border-indigo-100 bg-indigo-50/70 px-5 py-4 sm:px-6">
+        <div><p class="text-[11px] font-bold uppercase tracking-wide text-indigo-700">Administración V-LOG PHARMA</p><h2 id="adminPanelTitle" class="mt-1 font-display text-xl font-extrabold text-ink">Panel Administrador</h2><p class="mt-1 text-xs text-slate-500">Vista completa de publicaciones y reservas.</p></div>
+        <button id="adminPanelClose" type="button" aria-label="Cerrar Panel Admin" class="rounded-lg p-2 text-slate-500 transition hover:bg-white hover:text-ink"><i data-lucide="x" class="h-5 w-5"></i></button>
+      </header>
+      <div class="p-4 sm:p-6">
+        <div class="mb-5 grid gap-3 sm:grid-cols-3">
+          <article class="rounded-xl border border-slate-200 bg-white p-4"><p class="text-xs font-semibold text-slate-500">Total de lotes publicados</p><p id="adminTotalLots" class="mt-1 font-display text-2xl font-extrabold text-ink">—</p></article>
+          <article class="rounded-xl border border-emerald-200 bg-emerald-50/60 p-4"><p class="text-xs font-semibold text-emerald-800">Lotes disponibles</p><p id="adminAvailableLots" class="mt-1 font-display text-2xl font-extrabold text-emerald-900">—</p></article>
+          <article class="rounded-xl border border-amber-200 bg-amber-50/60 p-4"><p class="text-xs font-semibold text-amber-800">Lotes reservados</p><p id="adminReservedLots" class="mt-1 font-display text-2xl font-extrabold text-amber-900">—</p></article>
+        </div>
+        <div id="adminPanelMessage" class="hidden mb-4 rounded-lg border px-4 py-3 text-sm" role="status" aria-live="polite"></div>
+        <div class="max-h-[65vh] overflow-auto rounded-xl border border-slate-200">
+          <table class="min-w-[1500px] w-full border-collapse text-left text-xs">
+            <thead class="sticky top-0 z-10 bg-slate-100 text-[10px] uppercase tracking-wide text-slate-600">
+              <tr>
+                <th class="px-3 py-3">ID / Publicación</th>
+                <th class="px-3 py-3">Farmacia origen</th>
+                <th class="px-3 py-3">Correo vendedor</th>
+                <th class="px-3 py-3">Medicamento / Laboratorio</th>
+                <th class="px-3 py-3">Lote / Caducidad</th>
+                <th class="px-3 py-3">Stock / Precio</th>
+                <th class="px-3 py-3">Comuna</th>
+                <th class="px-3 py-3">Estado</th>
+                <th class="px-3 py-3">Reservado por</th>
+                <th class="px-3 py-3">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="adminLotsTableBody" class="divide-y divide-slate-100 bg-white"></tbody>
+          </table>
+        </div>
+        <p class="mt-3 text-[11px] text-slate-500">La eliminación forzosa es permanente y no se puede deshacer.</p>
+      </div>
+    </section>
+  </div>
+
   <div id="reservationModal" class="modal-backdrop fixed inset-0 z-50 items-center justify-center overflow-y-auto bg-slate-950/50 p-4 hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="my-auto w-full max-w-lg overflow-hidden rounded-2xl bg-white shadow-2xl">
       <div class="flex items-start justify-between border-b border-slate-100 px-5 py-4"><div><div id="modalEyebrow" class="text-[11px] font-bold uppercase text-teal-700">Guía digital de transferencia</div><h2 id="modalTitle" class="mt-1 font-display text-lg font-extrabold text-ink">Reserva confirmada</h2></div><button id="closeModal" type="button" aria-label="Cerrar" class="rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-ink"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" aria-hidden="true" class="lucide lucide-x h-5 w-5"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></div>
@@ -212,6 +250,7 @@
   <div id="toast" class="fixed bottom-5 left-1/2 z-[60] -translate-x-1/2 items-center gap-2 rounded-lg bg-ink px-4 py-3 text-sm font-semibold text-white shadow-xl hidden" role="status" aria-live="polite"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="circle-check" aria-hidden="true" class="lucide lucide-circle-check h-4 w-4 text-emerald-300"><circle cx="12" cy="12" r="10"></circle><path d="m16 9-5.5 5.5L8 12"></path></svg><span id="toastMessage">4 cajas reservadas · métricas actualizadas</span></div>
 
   <script>
+    const ADMIN_EMAILS = ['diegoarayaa1@gmail.com', 'sgaticam@correo.uss.cl'];
     const SUPABASE_URL = 'https://mreaougsajlycxxsnseg.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_aSFQ0JS4m5cS45m6mIAKLQ_7kvs8qrG';
     const recoveryHashParams = new URLSearchParams(window.location.hash.slice(1));
@@ -240,6 +279,7 @@
     let activeProductId = null;
     let activePublicationId = null;
     let currentPublications = [];
+    let adminLots = [];
     let toastTimer;
     const $ = (id) => document.getElementById(id);
     const formatCLP = (value) => '$' + Math.round(value).toLocaleString('es-CL');
@@ -255,6 +295,9 @@
           ? { text: days === 0 ? 'Vence hoy' : `Vence en ${days} días`, color: 'bg-rose-50 text-rose-800 ring-rose-200', dot: 'bg-rose-500' }
           : { text: `Vencido hace ${Math.abs(days)} días`, color: 'bg-rose-50 text-rose-800 ring-rose-200', dot: 'bg-rose-500' };
     const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+    const isAdminUser = () => Boolean(
+      currentUser?.email && ADMIN_EMAILS.some((email) => email.toLowerCase() === currentUser.email.trim().toLowerCase())
+    );
 
     function renderProducts() {
       const query = $('searchInput').value.trim().toLocaleLowerCase('es-CL');
@@ -572,7 +615,128 @@
       $('authUserControls').classList.toggle('hidden', !signedIn);
       $('authUserControls').classList.toggle('flex', signedIn);
       $('authUserEmail').textContent = currentUser?.email || '';
+      $('adminPanelButton').classList.toggle('hidden', !isAdminUser());
+      if (!isAdminUser()) closeAdminPanel();
       renderProducts();
+    }
+
+    function closeAdminPanel() {
+      $('adminPanelModal').classList.add('hidden');
+      $('adminPanelModal').classList.remove('flex');
+      document.body.classList.remove('overflow-hidden');
+    }
+
+    async function openAdminPanel() {
+      if (!supabaseClient) {
+        showToast('No se puede abrir el Panel Admin: no hay conexión con Supabase.');
+        return;
+      }
+      try {
+        const { data: sessionData, error: sessionError } = await supabaseClient.auth.getSession();
+        if (sessionError) throw sessionError;
+        currentUser = sessionData.session?.user || null;
+        renderAuthState();
+        if (!isAdminUser()) {
+          showToast('Tu cuenta no está autorizada para acceder al Panel Admin.');
+          return;
+        }
+        $('adminPanelModal').classList.remove('hidden');
+        $('adminPanelModal').classList.add('flex');
+        document.body.classList.add('overflow-hidden');
+        await loadAdminLots();
+        $('adminPanelClose').focus();
+      } catch (error) {
+        console.error('Error verificando acceso al Panel Admin:', error);
+        showToast(`No se pudo abrir el Panel Admin: ${error.message}`);
+      }
+    }
+
+    async function loadAdminLots() {
+      const message = $('adminPanelMessage');
+      message.classList.add('hidden');
+      $('adminLotsTableBody').innerHTML = '<tr><td colspan="10" class="px-4 py-10 text-center text-sm text-slate-500">Cargando todos los lotes…</td></tr>';
+      $('adminTotalLots').textContent = '—';
+      $('adminAvailableLots').textContent = '—';
+      $('adminReservedLots').textContent = '—';
+
+      const { data, error } = await supabaseClient.rpc('admin_list_lotes');
+      if (error) {
+        console.error('Error consultando todos los lotes para administración:', error);
+        $('adminLotsTableBody').innerHTML = '';
+        message.textContent = `No se pudo cargar el panel. Comprueba que las funciones de administrador de Supabase estén instaladas: ${error.message}`;
+        message.className = 'mb-4 rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-800';
+        return;
+      }
+
+      adminLots = data || [];
+      $('adminTotalLots').textContent = adminLots.length;
+      $('adminAvailableLots').textContent = adminLots.filter((lot) => lot.estado === 'disponible').length;
+      $('adminReservedLots').textContent = adminLots.filter((lot) => lot.estado === 'reservado').length;
+      renderAdminLots();
+    }
+
+    function renderAdminLots() {
+      const tableBody = $('adminLotsTableBody');
+      if (!adminLots.length) {
+        tableBody.innerHTML = '<tr><td colspan="10" class="px-4 py-10 text-center text-sm text-slate-500">No hay lotes registrados.</td></tr>';
+        return;
+      }
+
+      tableBody.innerHTML = adminLots.map((lot) => {
+        const status = lot.estado === 'disponible'
+          ? { label: 'Disponible', classes: 'bg-emerald-50 text-emerald-800 ring-emerald-200' }
+          : lot.estado === 'reservado'
+            ? { label: 'Reservado', classes: 'bg-amber-50 text-amber-800 ring-amber-200' }
+            : { label: lot.estado || 'Sin estado', classes: 'bg-slate-100 text-slate-700 ring-slate-200' };
+        const createdAt = lot.created_at
+          ? new Date(lot.created_at).toLocaleString('es-CL')
+          : 'Fecha no disponible';
+        const expiry = lot.fecha_vencimiento
+          ? new Date(`${lot.fecha_vencimiento}T00:00:00`).toLocaleDateString('es-CL')
+          : '—';
+
+        return `<tr class="align-top hover:bg-slate-50/70">
+          <td class="whitespace-nowrap px-3 py-3"><span class="block font-mono font-bold text-ink">#${escapeHtml(lot.id)}</span><span class="mt-1 block text-[10px] text-slate-500">${escapeHtml(createdAt)}</span></td>
+          <td class="max-w-44 px-3 py-3 font-medium text-slate-700">${escapeHtml(lot.farmacia_origen || 'No especificada')}</td>
+          <td class="px-3 py-3 text-slate-600">${escapeHtml(lot.publicado_por || '—')}</td>
+          <td class="px-3 py-3"><span class="block font-bold text-ink">${escapeHtml(lot.principio_activo || '—')}</span><span class="mt-1 block text-slate-500">${escapeHtml(lot.laboratorio || '—')}</span></td>
+          <td class="whitespace-nowrap px-3 py-3"><span class="block font-mono text-slate-700">${escapeHtml(lot.numero_lote || '—')}</span><span class="mt-1 block text-slate-500">Vence ${escapeHtml(expiry)}</span></td>
+          <td class="whitespace-nowrap px-3 py-3"><span class="block font-semibold text-slate-700">${Number(lot.cantidad_cajas) || 0} cajas</span><span class="mt-1 block text-slate-500">${formatCLP(Number(lot.precio_oferta) || 0)}</span></td>
+          <td class="px-3 py-3 text-slate-600">${escapeHtml(lot.comuna || '—')}</td>
+          <td class="px-3 py-3"><span class="inline-flex rounded-full px-2.5 py-1 text-[10px] font-bold ring-1 ring-inset ${status.classes}">${escapeHtml(status.label)}</span></td>
+          <td class="px-3 py-3 text-slate-600">${escapeHtml(lot.reservado_por || '—')}</td>
+          <td class="px-3 py-3"><button type="button" data-admin-delete="${escapeHtml(lot.id)}" class="inline-flex h-8 items-center justify-center gap-1.5 whitespace-nowrap rounded-lg border border-rose-200 bg-rose-50 px-2.5 text-[10px] font-bold text-rose-700 transition hover:bg-rose-100 disabled:cursor-wait disabled:opacity-60"><i data-lucide="trash-2" class="h-3.5 w-3.5"></i>Eliminar</button></td>
+        </tr>`;
+      }).join('');
+      lucide.createIcons();
+    }
+
+    async function deleteAdminLot(id, button) {
+      if (!window.confirm(`¿Eliminar forzosamente el lote #${id}? Esta acción no se puede deshacer.`)) return;
+      button.disabled = true;
+      try {
+        const { data: sessionData, error: sessionError } = await supabaseClient.auth.getSession();
+        if (sessionError) throw sessionError;
+        currentUser = sessionData.session?.user || null;
+        renderAuthState();
+        if (!isAdminUser()) throw new Error('La cuenta actual no está autorizada para eliminar lotes.');
+
+        const { data, error } = await supabaseClient.rpc('admin_delete_lote', { p_lot_id: id });
+        if (error) throw error;
+        if (!data) {
+          showToast('No se eliminó el lote; puede que ya no exista.');
+          await loadAdminLots();
+          return;
+        }
+
+        showToast(`Lote #${id} eliminado.`);
+        await Promise.all([loadAdminLots(), loadProducts()]);
+      } catch (error) {
+        console.error('Error eliminando lote desde Panel Admin:', error);
+        showToast(`No se pudo eliminar el lote: ${error.message}`);
+      } finally {
+        if (button.isConnected) button.disabled = false;
+      }
     }
 
     async function openMyReservations() {
@@ -1173,6 +1337,15 @@
     });
     $('authForm').addEventListener('submit', submitAuth);
     $('authLogoutButton').addEventListener('click', signOut);
+    $('adminPanelButton').addEventListener('click', openAdminPanel);
+    $('adminPanelClose').addEventListener('click', closeAdminPanel);
+    $('adminPanelModal').addEventListener('click', (event) => {
+      if (event.target === $('adminPanelModal')) closeAdminPanel();
+    });
+    $('adminLotsTableBody').addEventListener('click', (event) => {
+      const button = event.target.closest('[data-admin-delete]');
+      if (button) deleteAdminLot(button.dataset.adminDelete, button);
+    });
     $('myReservationsButton').addEventListener('click', openMyReservations);
     $('myPublicationsButton').addEventListener('click', openMyPublications);
     $('myReservationsClose').addEventListener('click', () => {
@@ -1222,6 +1395,7 @@
       if (!$('myReservationsModal').classList.contains('hidden')) $('myReservationsClose').click();
       if (!$('editPublicationModal').classList.contains('hidden')) closeEditPublication();
       else if (!$('myPublicationsModal').classList.contains('hidden')) closeMyPublications();
+      if (!$('adminPanelModal').classList.contains('hidden')) closeAdminPanel();
     });
     $('sellerForm').addEventListener('submit', publishProduct);
     ['activeInput', 'expiryInput', 'offerInput', 'originalInput'].forEach((id) => $(id).addEventListener('input', refreshValidation));
