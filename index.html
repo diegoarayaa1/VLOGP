@@ -199,17 +199,17 @@
             <div class="mb-6 flex items-start gap-3"><span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-teal-50 text-teal-700"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="clipboard-plus" aria-hidden="true" class="lucide lucide-clipboard-plus h-5 w-5"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><path d="M9 14h6"></path><path d="M12 17v-6"></path></svg></span><div><h2 class="font-display text-lg font-extrabold text-ink">Publicar inventario</h2><p class="mt-1 text-sm text-slate-500">Completa los datos del lote para ofrecerlo en el corredor.</p></div></div>
             <form id="sellerForm" novalidate="">
               <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <label class="sm:col-span-2"><span class="mb-1.5 block text-xs font-bold text-slate-700">Principio activo <span class="text-rose-600">*</span></span><input id="activeInput" required="" autocomplete="off" type="text" placeholder="Ej. Paracetamol 500 mg" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
-                <label class="sm:col-span-2"><span class="mb-1.5 block text-xs font-bold text-slate-700">Nombre de la Farmacia <span class="text-rose-600">*</span></span><input id="pharmacyInput" required="" autocomplete="organization" type="text" placeholder="Ej. Farmacia Central" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
-                <label><span class="mb-1.5 block text-xs font-bold text-slate-700">Marca / presentación</span><input id="brandInput" type="text" placeholder="Ej. comprimidos x 20" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
-                <label><span class="mb-1.5 block text-xs font-bold text-slate-700">Laboratorio <span class="text-rose-600">*</span></span><select id="sellerLab" required="" class="h-11 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm"><option value="">Seleccionar laboratorio</option><option>Lab Chile</option><option>Mintlab</option><option>Saval</option><option>Bagó</option></select></label>
-                <label><span class="mb-1.5 block text-xs font-bold text-slate-700">Comuna <span class="text-rose-600">*</span></span><select id="sellerCommune" required="" class="h-11 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm"><option value="">Seleccionar comuna</option><option>Viña del Mar</option><option>Quilpué</option><option>Villa Alemana</option></select></label>
-                <label><span class="mb-1.5 block text-xs font-bold text-slate-700">Registro ISP <span class="text-rose-600">*</span></span><input id="ispInput" required="" type="text" placeholder="Ej. F-12345/20" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
-                <label><span class="mb-1.5 block text-xs font-bold text-slate-700">N.º de lote <span class="text-rose-600">*</span></span><input id="batchInput" required="" type="text" placeholder="Ej. LCH-24A091" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
-                <label><span class="mb-1.5 block text-xs font-bold text-slate-700">Fecha de vencimiento <span class="text-rose-600">*</span></span><input id="expiryInput" required="" type="date" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"><span class="mt-1 block text-[11px] text-slate-400">Mínimo 60 días de vigencia al publicar.</span></label>
-                <label><span class="mb-1.5 block text-xs font-bold text-slate-700">Cajas disponibles <span class="text-rose-600">*</span></span><input id="boxesInput" required="" type="number" min="1" step="1" placeholder="Ej. 24" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
-                <label><span class="mb-1.5 block text-xs font-bold text-slate-700">Precio original (CLP / caja) <span class="text-rose-600">*</span></span><input id="originalInput" required="" type="number" min="1" step="1" placeholder="Ej. 5990" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
-                <label><span class="mb-1.5 block text-xs font-bold text-slate-700">Precio oferta (CLP / caja) <span class="text-rose-600">*</span></span><input id="offerInput" required="" type="number" min="1" step="1" placeholder="Ej. 2990" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
+                <label class="sm:col-span-2"><span class="mb-1.5 block text-xs font-bold text-slate-700">Principio activo <span class="text-rose-600">*</span></span><input id="activeInput" name="principio_activo" required="" autocomplete="off" type="text" placeholder="Ej. Paracetamol 500 mg" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
+                <label class="sm:col-span-2"><span class="mb-1.5 block text-xs font-bold text-slate-700">Nombre de la Farmacia <span class="text-rose-600">*</span></span><input id="pharmacyInput" name="farmacia_origen" required="" autocomplete="organization" type="text" placeholder="Ej. Farmacia Central" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
+                <label><span class="mb-1.5 block text-xs font-bold text-slate-700">Marca / presentación</span><input id="brandInput" name="marca_presentacion" type="text" placeholder="Ej. comprimidos x 20" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
+                <label><span class="mb-1.5 block text-xs font-bold text-slate-700">Laboratorio <span class="text-rose-600">*</span></span><select id="sellerLab" name="laboratorio" required="" class="h-11 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm"><option value="">Seleccionar laboratorio</option><option>Lab Chile</option><option>Mintlab</option><option>Saval</option><option>Bagó</option><option>Otro</option></select></label>
+                <label><span class="mb-1.5 block text-xs font-bold text-slate-700">Comuna <span class="text-rose-600">*</span></span><select id="sellerCommune" name="comuna" required="" class="h-11 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm"><option value="">Seleccionar comuna</option><option>Viña del Mar</option><option>Quilpué</option><option>Villa Alemana</option></select></label>
+                <label><span class="mb-1.5 block text-xs font-bold text-slate-700">Registro ISP <span class="text-rose-600">*</span></span><input id="ispInput" name="registro_isp" required="" type="text" placeholder="Ej. F-12345/20" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
+                <label><span class="mb-1.5 block text-xs font-bold text-slate-700">N.º de lote <span class="text-rose-600">*</span></span><input id="batchInput" name="numero_lote" required="" type="text" placeholder="Ej. LCH-24A091" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
+                <label><span class="mb-1.5 block text-xs font-bold text-slate-700">Fecha de vencimiento <span class="text-rose-600">*</span></span><input id="expiryInput" name="fecha_vencimiento" required="" type="date" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"><span class="mt-1 block text-[11px] text-slate-400">Mínimo 60 días de vigencia al publicar.</span></label>
+                <label><span class="mb-1.5 block text-xs font-bold text-slate-700">Cajas disponibles <span class="text-rose-600">*</span></span><input id="boxesInput" name="cantidad_cajas" required="" type="number" min="1" step="1" placeholder="Ej. 24" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
+                <label><span class="mb-1.5 block text-xs font-bold text-slate-700">Precio original (CLP / caja) <span class="text-rose-600">*</span></span><input id="originalInput" name="precio_original" required="" type="number" min="1" step="1" placeholder="Ej. 5990" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
+                <label><span class="mb-1.5 block text-xs font-bold text-slate-700">Precio oferta (CLP / caja) <span class="text-rose-600">*</span></span><input id="offerInput" name="precio_oferta" required="" type="number" min="1" step="1" placeholder="Ej. 2990" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
               </div>
               <div id="validationAlert" role="alert" aria-live="assertive" class="mt-4 hidden rounded-lg border border-rose-200 bg-rose-50 p-3.5 text-sm leading-5 text-rose-800"><div class="flex gap-2.5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="triangle-alert" aria-hidden="true" class="lucide lucide-triangle-alert mt-0.5 h-4 w-4 shrink-0"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg><div><p class="font-bold">Publicación bloqueada · Fuera del alcance del piloto</p><p id="validationMessage" class="mt-0.5 text-xs"></p></div></div></div>
               <div id="formHint" class="mt-4 rounded-lg border border-slate-200 bg-slate-50 p-3 text-xs leading-5 text-slate-600"><span class="font-bold">Criterio piloto:</span> no se admiten medicamentos de control legal estricto ni lotes con menos de 60 días para vencer.</div>
@@ -271,19 +271,28 @@
   </div>
 
   <div id="editPublicationModal" class="modal-backdrop fixed inset-0 z-[70] items-center justify-center overflow-y-auto bg-slate-950/50 p-4 hidden" role="dialog" aria-modal="true" aria-labelledby="editPublicationTitle">
-    <form id="editPublicationForm" class="my-auto w-full max-w-md rounded-2xl bg-white p-5 shadow-2xl">
+    <form id="editPublicationForm" class="my-auto w-full max-w-3xl rounded-2xl bg-white p-5 shadow-2xl">
       <div class="mb-5 flex items-start justify-between">
-        <div><p class="text-[11px] font-bold uppercase text-medical">Actualizar lote</p><h2 id="editPublicationTitle" class="mt-1 font-display text-lg font-extrabold text-ink">Editar stock y precio</h2></div>
+        <div><p class="text-[11px] font-bold uppercase text-medical">Actualizar lote</p><h2 id="editPublicationTitle" class="mt-1 font-display text-lg font-extrabold text-ink">Editar publicación</h2><p class="mt-1 text-xs text-slate-500">Corrige los datos técnicos. Las publicaciones rechazadas volverán a revisión administrativa.</p></div>
         <button id="editPublicationClose" type="button" aria-label="Cerrar edición" class="rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-ink"><i data-lucide="x" class="h-5 w-5"></i></button>
       </div>
-      <div class="space-y-4">
-        <label class="block"><span class="mb-1.5 block text-xs font-bold text-slate-700">Cantidad de cajas</span><input id="editPublicationBoxes" required type="number" min="1" step="1" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
-        <label class="block"><span class="mb-1.5 block text-xs font-bold text-slate-700">Precio de oferta por caja (CLP)</span><input id="editPublicationPrice" required type="number" min="1" step="1" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
-        <div class="flex justify-end gap-2 pt-2">
+      <div class="grid max-h-[65vh] grid-cols-1 gap-4 overflow-y-auto pr-1 sm:grid-cols-2">
+        <label class="sm:col-span-2"><span class="mb-1.5 block text-xs font-bold text-slate-700">Principio activo *</span><input id="editPublicationActive" required type="text" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
+        <label><span class="mb-1.5 block text-xs font-bold text-slate-700">Farmacia de origen *</span><input id="editPublicationPharmacy" required type="text" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
+        <label><span class="mb-1.5 block text-xs font-bold text-slate-700">Marca / presentación</span><input id="editPublicationBrand" type="text" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
+        <label><span class="mb-1.5 block text-xs font-bold text-slate-700">Laboratorio *</span><select id="editPublicationLab" required class="h-11 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm"><option value="">Seleccionar laboratorio</option><option>Lab Chile</option><option>Mintlab</option><option>Saval</option><option>Bagó</option><option>Otro</option></select></label>
+        <label><span class="mb-1.5 block text-xs font-bold text-slate-700">Comuna *</span><select id="editPublicationCommune" required class="h-11 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm"><option value="">Seleccionar comuna</option><option>Viña del Mar</option><option>Quilpué</option><option>Villa Alemana</option></select></label>
+        <label><span class="mb-1.5 block text-xs font-bold text-slate-700">Registro ISP *</span><input id="editPublicationIsp" required type="text" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
+        <label><span class="mb-1.5 block text-xs font-bold text-slate-700">N.º de lote *</span><input id="editPublicationBatch" required type="text" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
+        <label><span class="mb-1.5 block text-xs font-bold text-slate-700">Fecha de vencimiento *</span><input id="editPublicationExpiry" required type="date" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
+        <label><span class="mb-1.5 block text-xs font-bold text-slate-700">Cantidad de cajas *</span><input id="editPublicationBoxes" required type="number" min="1" step="1" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
+        <label><span class="mb-1.5 block text-xs font-bold text-slate-700">Precio original por caja (CLP) *</span><input id="editPublicationOriginal" required type="number" min="1" step="1" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
+        <label><span class="mb-1.5 block text-xs font-bold text-slate-700">Precio oferta por caja (CLP) *</span><input id="editPublicationPrice" required type="number" min="1" step="1" class="h-11 w-full rounded-lg border border-slate-200 px-3 text-sm"></label>
+      </div>
+      <div class="mt-5 flex justify-end gap-2">
           <button id="editPublicationCancel" type="button" class="h-10 rounded-lg border border-slate-200 px-4 text-xs font-bold text-slate-700 hover:bg-slate-50">Cancelar</button>
           <button id="editPublicationSave" type="submit" class="h-10 rounded-lg bg-teal-700 px-4 text-xs font-bold text-white hover:bg-teal-800 disabled:opacity-60">Guardar cambios</button>
         </div>
-      </div>
     </form>
   </div>
 
@@ -301,16 +310,17 @@
         </div>
         <div id="adminPanelMessage" class="hidden mb-4 rounded-lg border px-4 py-3 text-sm" role="status" aria-live="polite"></div>
         <div class="max-h-[65vh] overflow-auto rounded-xl border border-slate-200">
-          <table class="min-w-[1500px] w-full border-collapse text-left text-xs">
+          <table class="min-w-[1900px] w-full border-collapse text-left text-xs">
             <thead class="sticky top-0 z-10 bg-slate-100 text-[10px] uppercase tracking-wide text-slate-600">
               <tr>
                 <th class="px-3 py-3">ID / Publicación</th>
-                <th class="px-3 py-3">Farmacia origen</th>
-                <th class="px-3 py-3">Correo vendedor</th>
-                <th class="px-3 py-3">Medicamento / Laboratorio</th>
-                <th class="px-3 py-3">Lote / Caducidad</th>
-                <th class="px-3 py-3">Stock / Precio</th>
-                <th class="px-3 py-3">Comuna</th>
+                <th class="px-3 py-3">Farmacia &amp; Comuna</th>
+                <th class="px-3 py-3">Contacto vendedor</th>
+                <th class="px-3 py-3">Medicamento</th>
+                <th class="px-3 py-3">Laboratorio</th>
+                <th class="px-3 py-3">Registro sanitario ISP</th>
+                <th class="px-3 py-3">Lote &amp; Caducidad</th>
+                <th class="px-3 py-3">Stock &amp; Precios</th>
                 <th class="px-3 py-3">Estado</th>
                 <th class="px-3 py-3">Reservado por</th>
                 <th class="px-3 py-3">Acciones</th>
@@ -443,7 +453,7 @@
       try {
         const { data, error } = await supabaseClient
           .from('lotes_medicamentos')
-          .select('id, principio_activo, laboratorio, registro_isp, numero_lote, fecha_vencimiento, cantidad_cajas, precio_oferta, comuna')
+          .select('id, principio_activo, marca_presentacion, laboratorio, registro_isp, numero_lote, fecha_vencimiento, cantidad_cajas, precio_original, precio_oferta, comuna')
           .eq('estado', 'disponible')
           .gt('cantidad_cajas', 0)
           .order('fecha_vencimiento', { ascending: true });
@@ -474,14 +484,14 @@
         products = data.map((row, index) => ({
           id: String(row.id ?? `${row.numero_lote}-${index}`),
           active: row.principio_activo,
-          brand: '',
+          brand: row.marca_presentacion || '',
           lab: row.laboratorio,
           commune: row.comuna,
           batch: row.numero_lote,
           isp: row.registro_isp,
           expiry: row.fecha_vencimiento,
           boxes: Number(row.cantidad_cajas),
-          original: null,
+          original: Number(row.precio_original) || null,
           offer: Number(row.precio_oferta),
           isMine: ownProductIds.has(String(row.id)),
           tone: tones[index % tones.length],
@@ -757,7 +767,7 @@
     async function loadAdminLots() {
       const message = $('adminPanelMessage');
       message.classList.add('hidden');
-      $('adminLotsTableBody').innerHTML = '<tr><td colspan="10" class="px-4 py-10 text-center text-sm text-slate-500">Cargando todos los lotes…</td></tr>';
+      $('adminLotsTableBody').innerHTML = '<tr><td colspan="11" class="px-4 py-10 text-center text-sm text-slate-500">Cargando todos los lotes…</td></tr>';
       $('adminTotalLots').textContent = '—';
       $('adminAvailableLots').textContent = '—';
       $('adminReservedLots').textContent = '—';
@@ -781,7 +791,7 @@
     function renderAdminLots() {
       const tableBody = $('adminLotsTableBody');
       if (!adminLots.length) {
-        tableBody.innerHTML = '<tr><td colspan="10" class="px-4 py-10 text-center text-sm text-slate-500">No hay lotes registrados.</td></tr>';
+        tableBody.innerHTML = '<tr><td colspan="11" class="px-4 py-10 text-center text-sm text-slate-500">No hay lotes registrados.</td></tr>';
         return;
       }
 
@@ -804,12 +814,13 @@
 
         return `<tr class="align-top hover:bg-slate-50/70">
           <td class="whitespace-nowrap px-3 py-3"><span class="block font-mono font-bold text-ink">#${escapeHtml(lot.id)}</span><span class="mt-1 block text-[10px] text-slate-500">${escapeHtml(createdAt)}</span></td>
-          <td class="max-w-44 px-3 py-3 font-medium text-slate-700">${escapeHtml(lot.farmacia_origen || 'No especificada')}</td>
+          <td class="max-w-44 px-3 py-3"><span class="block font-semibold text-slate-700">${escapeHtml(lot.farmacia_origen || 'No especificada')}</span><span class="mt-1 block text-slate-500">${escapeHtml(lot.comuna || '—')}</span></td>
           <td class="px-3 py-3 text-slate-600">${escapeHtml(lot.publicado_por || '—')}</td>
-          <td class="px-3 py-3"><span class="block font-bold text-ink">${escapeHtml(lot.principio_activo || '—')}</span><span class="mt-1 block text-slate-500">${escapeHtml(lot.laboratorio || '—')}</span></td>
+          <td class="px-3 py-3 font-bold text-ink">${escapeHtml(lot.principio_activo || '—')}${lot.marca_presentacion ? ` (${escapeHtml(lot.marca_presentacion)})` : ''}</td>
+          <td class="px-3 py-3 text-slate-600">${escapeHtml(lot.laboratorio || '—')}</td>
+          <td class="whitespace-nowrap px-3 py-3"><span class="inline-flex rounded-md bg-indigo-50 px-2.5 py-1 font-mono font-bold text-indigo-800 ring-1 ring-inset ring-indigo-200">${escapeHtml(lot.registro_isp || 'Sin ISP')}</span></td>
           <td class="whitespace-nowrap px-3 py-3"><span class="block font-mono text-slate-700">${escapeHtml(lot.numero_lote || '—')}</span><span class="mt-1 block text-slate-500">Vence ${escapeHtml(expiry)}</span></td>
-          <td class="whitespace-nowrap px-3 py-3"><span class="block font-semibold text-slate-700">${Number(lot.cantidad_cajas) || 0} cajas</span><span class="mt-1 block text-slate-500">${formatCLP(Number(lot.precio_oferta) || 0)}</span></td>
-          <td class="px-3 py-3 text-slate-600">${escapeHtml(lot.comuna || '—')}</td>
+          <td class="whitespace-nowrap px-3 py-3"><span class="block font-semibold text-slate-700">${Number(lot.cantidad_cajas) || 0} cajas</span><span class="mt-1 block text-slate-600">Oferta: ${formatCLP(Number(lot.precio_oferta) || 0)}</span><span class="mt-1 block text-slate-500">Original: ${lot.precio_original == null ? 'Sin dato' : formatCLP(Number(lot.precio_original))}</span></td>
           <td class="px-3 py-3"><span class="inline-flex rounded-full px-2.5 py-1 text-[10px] font-bold ring-1 ring-inset ${status.classes}">${escapeHtml(status.label)}</span></td>
           <td class="px-3 py-3 text-slate-600">${escapeHtml(lot.reservado_por || '—')}</td>
           <td class="px-3 py-3"><div class="flex flex-col items-start gap-1.5">
@@ -850,7 +861,16 @@
     }
 
     async function moderateAdminLot(id, action, button) {
-      if (action === 'reject' && !window.confirm(`¿Rechazar el lote #${id}? No se publicará en el catálogo.`)) return;
+      let rejectionReason = null;
+      if (action === 'reject') {
+        rejectionReason = window.prompt('Indica el motivo del rechazo técnico:');
+        if (rejectionReason === null) return;
+        rejectionReason = rejectionReason.trim();
+        if (!rejectionReason) {
+          showToast('Debes indicar un motivo para rechazar el lote.');
+          return;
+        }
+      }
       button.disabled = true;
       try {
         const { data: sessionData, error: sessionError } = await supabaseClient.auth.getSession();
@@ -861,7 +881,8 @@
 
         const { data, error } = await supabaseClient.rpc('admin_moderate_lote', {
           p_lot_id: id,
-          p_action: action
+          p_action: action,
+          p_rejection_reason: rejectionReason
         });
         if (error) throw error;
         if (!data) {
@@ -870,7 +891,7 @@
           return;
         }
 
-        showToast(action === 'approve' ? 'Lote aprobado y publicado en el catálogo.' : 'Lote rechazado; no aparecerá en el catálogo.');
+        showToast(action === 'approve' ? 'Lote aprobado y publicado en el catálogo.' : 'Lote rechazado y motivo enviado al vendedor.');
         await Promise.all([loadAdminLots(), loadProducts()]);
       } catch (error) {
         console.error('Error moderando lote desde Panel Admin:', error);
@@ -1023,11 +1044,7 @@
         currentUser = user;
         renderAuthState();
 
-        const { data, error } = await supabaseClient
-          .from('lotes_medicamentos')
-          .select('id, principio_activo, laboratorio, numero_lote, cantidad_cajas, precio_oferta, fecha_vencimiento, estado, reservado_por')
-          .eq('vendedor_id', user.id)
-          .order('created_at', { ascending: false });
+        const { data, error } = await supabaseClient.rpc('seller_list_lotes');
         if (error) throw error;
         currentPublications = data;
         renderMyPublications();
@@ -1055,22 +1072,25 @@
             : reserved
               ? { label: '📦 Reservado', classes: 'vlogp-reserved-badge' }
               : publication.estado === 'rechazado'
-                ? { label: '❌ No Aprobado', classes: 'bg-rose-50 text-rose-800 ring-rose-200' }
+                ? { label: '❌ Rechazado por Admin', classes: 'bg-rose-50 text-rose-800 ring-rose-200' }
                 : { label: publication.estado || 'Sin estado', classes: 'bg-slate-100 text-slate-700 ring-slate-200' };
-        return `<article class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+        return `<article class="rounded-xl border ${publication.estado === 'rechazado' ? 'border-rose-300' : 'border-slate-200'} bg-white p-4 shadow-sm">
           <div class="flex flex-col justify-between gap-3 sm:flex-row sm:items-start">
-            <div><h3 class="font-display text-base font-extrabold text-ink">${escapeHtml(publication.principio_activo)}</h3><p class="mt-1 text-sm text-slate-600">${escapeHtml(publication.laboratorio)} · Lote ${escapeHtml(publication.numero_lote)}</p></div>
+            <div><h3 class="font-display text-base font-extrabold text-ink">${escapeHtml(publication.principio_activo)}${publication.marca_presentacion ? ` (${escapeHtml(publication.marca_presentacion)})` : ''}</h3><p class="mt-1 text-sm text-slate-600">${escapeHtml(publication.laboratorio)} · Lote ${escapeHtml(publication.numero_lote)}</p></div>
             <span class="inline-flex w-fit rounded-full px-3 py-1 text-xs font-bold ring-1 ring-inset ${status.classes}">${escapeHtml(status.label)}</span>
           </div>
           ${reserved ? `<p class="vlogp-reserved-note mt-3 rounded-lg border px-3 py-2 text-xs"><span class="font-bold">Solicitado por:</span> ${escapeHtml(publication.reservado_por || 'Usuario no especificado')}</p>` : ''}
+          ${publication.estado === 'rechazado' ? `<p class="mt-3 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-xs leading-5 text-rose-800"><span class="font-bold">Motivo de la observación:</span> ${escapeHtml(publication.motivo_rechazo || 'No se indicó un motivo.')}</p>` : ''}
           <div class="mt-4 grid gap-2 border-t border-slate-100 pt-3 text-xs text-slate-600 sm:grid-cols-2">
+            <p><span class="font-bold text-slate-700">Farmacia:</span> ${escapeHtml(publication.farmacia_origen || 'No especificada')}</p>
+            <p><span class="font-bold text-slate-700">Registro ISP:</span> ${escapeHtml(publication.registro_isp || 'Sin ISP')}</p>
             <p><span class="font-bold text-slate-700">Stock:</span> ${Number(publication.cantidad_cajas)} cajas</p>
-            <p><span class="font-bold text-slate-700">Precio:</span> ${formatCLP(Number(publication.precio_oferta))} CLP por caja</p>
+            <p><span class="font-bold text-slate-700">Oferta / Original:</span> ${formatCLP(Number(publication.precio_oferta))} / ${publication.precio_original == null ? 'Sin dato' : formatCLP(Number(publication.precio_original))} por caja</p>
             <p><span class="font-bold text-slate-700">Caducidad:</span> ${new Date(publication.fecha_vencimiento + 'T00:00:00').toLocaleDateString('es-CL')}</p>
           </div>
           <div class="mt-4 flex flex-wrap justify-end gap-2">
             ${reserved ? `<button type="button" data-release-publication="${escapeHtml(publication.id)}" class="h-9 rounded-lg border border-amber-200 bg-amber-50 px-3 text-xs font-bold text-amber-800 transition hover:bg-amber-100">Liberar Reserva</button>` : ''}
-            ${publication.estado !== 'rechazado' ? `<button type="button" data-edit-publication="${escapeHtml(publication.id)}" class="h-9 rounded-lg border border-slate-200 px-3 text-xs font-bold text-slate-700 transition hover:bg-slate-50">Editar</button>` : ''}
+            <button type="button" data-edit-publication="${escapeHtml(publication.id)}" class="h-9 rounded-lg border border-slate-200 px-3 text-xs font-bold text-slate-700 transition hover:bg-slate-50">Editar</button>
             <button type="button" data-delete-publication="${escapeHtml(publication.id)}" class="h-9 rounded-lg border border-rose-200 bg-rose-50 px-3 text-xs font-bold text-rose-700 transition hover:bg-rose-100">Eliminar</button>
           </div>
         </article>`;
@@ -1122,12 +1142,21 @@
       const publication = currentPublications.find((item) => String(item.id) === String(id));
       if (!publication) return;
       activePublicationId = String(id);
+      $('editPublicationActive').value = publication.principio_activo || '';
+      $('editPublicationPharmacy').value = publication.farmacia_origen || '';
+      $('editPublicationBrand').value = publication.marca_presentacion || '';
+      $('editPublicationLab').value = publication.laboratorio || '';
+      $('editPublicationCommune').value = publication.comuna || '';
+      $('editPublicationIsp').value = publication.registro_isp || '';
+      $('editPublicationBatch').value = publication.numero_lote || '';
+      $('editPublicationExpiry').value = publication.fecha_vencimiento || '';
       $('editPublicationBoxes').value = publication.cantidad_cajas;
+      $('editPublicationOriginal').value = publication.precio_original || '';
       $('editPublicationPrice').value = publication.precio_oferta;
       $('editPublicationModal').classList.remove('hidden');
       $('editPublicationModal').classList.add('flex');
       document.body.classList.add('overflow-hidden');
-      $('editPublicationBoxes').focus();
+      $('editPublicationActive').focus();
     }
 
     function closeEditPublication() {
@@ -1139,19 +1168,60 @@
 
     async function savePublicationEdit(event) {
       event.preventDefault();
+      const form = $('editPublicationForm');
+      if (!form.reportValidity()) return;
+      const active = $('editPublicationActive').value.trim();
+      const pharmacy = $('editPublicationPharmacy').value.trim();
+      const brand = $('editPublicationBrand').value.trim();
+      const laboratory = $('editPublicationLab').value;
+      const commune = $('editPublicationCommune').value;
+      const isp = $('editPublicationIsp').value.trim();
+      const batch = $('editPublicationBatch').value.trim();
+      const expiry = $('editPublicationExpiry').value;
       const boxes = Number($('editPublicationBoxes').value);
+      const original = Number($('editPublicationOriginal').value);
       const price = Number($('editPublicationPrice').value);
-      if (!Number.isInteger(boxes) || boxes < 1 || !Number.isInteger(price) || price < 1) {
-        showToast('La cantidad y el precio deben ser números enteros mayores que cero.');
+      const publication = currentPublications.find((item) => String(item.id) === activePublicationId);
+      if (!publication) {
+        showToast('No se encontró la publicación que intentas editar.');
+        return;
+      }
+      if (!Number.isInteger(boxes) || boxes < 1 || !Number.isInteger(original) || original < 1 || !Number.isInteger(price) || price < 1 || price >= original) {
+        showToast('La cantidad debe ser un entero positivo y la oferta debe ser menor que el precio original.');
+        return;
+      }
+      if (daysUntil(expiry) < 60) {
+        showToast('La fecha de vencimiento debe tener al menos 60 días de vigencia.');
+        return;
+      }
+      if (/\b(fentanil(?:o|e)?|clonazepam|morfina)\b/i.test(active)) {
+        showToast('El principio activo está fuera del alcance regulatorio del piloto.');
         return;
       }
       const button = $('editPublicationSave');
       button.disabled = true;
       try {
         const user = await getPublicationUser();
+        const changes = {
+          principio_activo: active,
+          farmacia_origen: pharmacy,
+          marca_presentacion: brand || null,
+          laboratorio,
+          comuna,
+          registro_isp: isp,
+          numero_lote: batch,
+          fecha_vencimiento: expiry,
+          cantidad_cajas: boxes,
+          precio_original: original,
+          precio_oferta: price
+        };
+        if (publication.estado === 'rechazado') {
+          changes.estado = 'pendiente_revision';
+          changes.motivo_rechazo = null;
+        }
         const { data, error } = await supabaseClient
           .from('lotes_medicamentos')
-          .update({ cantidad_cajas: boxes, precio_oferta: price })
+          .update(changes)
           .eq('id', activePublicationId)
           .eq('vendedor_id', user.id)
           .select('id')
@@ -1159,7 +1229,9 @@
         if (error) throw error;
         if (!data) throw new Error('La publicación no existe o no tienes permiso para editarla.');
         closeEditPublication();
-        showToast('Publicación actualizada.');
+        showToast(publication.estado === 'rechazado'
+          ? 'Correcciones guardadas. La publicación volvió a revisión administrativa.'
+          : 'Publicación actualizada.');
         await refreshPublicationViews();
       } catch (error) {
         console.error('Error actualizando publicación:', error);
@@ -1421,13 +1493,15 @@
       const payload = {
         principio_activo: $('activeInput').value.trim(),
         farmacia_origen: $('pharmacyInput').value.trim(),
+        marca_presentacion: $('brandInput').value.trim() || null,
         laboratorio: $('sellerLab').value,
+        comuna: $('sellerCommune').value,
         registro_isp: $('ispInput').value.trim(),
         numero_lote: $('batchInput').value.trim(),
         fecha_vencimiento: $('expiryInput').value,
         cantidad_cajas: boxes,
+        precio_original: original,
         precio_oferta: offer,
-        comuna: $('sellerCommune').value,
         estado: 'pendiente_revision'
       };
       const button = $('publishButton');
